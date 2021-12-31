@@ -9,7 +9,8 @@ Our project is a web application that allows users to
 
 <pre>
     1. Tutorial Enrollement - CRUD operations (Enroll(POST), UnEnroll(DELETE), ViewTutorial(GET))
-    2. Project Submission - CRUD operations (CreateProject(POST), DeleteProject(DELETE), SubmitProject(POST), EditProject(PUT), ViewProject(GET))
+    2. Project Submission - CRUD operations (CreateProject(POST), DeleteProject(DELETE), 
+                           SubmitProject(POST), EditProject(PUT), ViewProject(GET))
 </pre>
       
 ## Group Members

@@ -1,4 +1,4 @@
-# Web Application group project
+# Software Tutorials - Group Project
 <pre>
 Our project is a web application that allows users to 
       1. search for tutorials

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Register</title>
+	<link rel="stylesheet" type="text/css" th:href="@{css/login.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}">
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img th:src="@{images/logo.png}" alt="bootstrap 4 login page">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Register</h4>
+							<form method="POST" class="my-login-validation" novalidate="" th:action="@{/register}" id="registerForm">
+								<div class="form-group">
+									<label th:for="fullName">Full Name</label>
+									<input id="fullName" type="text" class="form-control" name="fullName" required autofocus>
+									<div class="invalid-feedback">
+										What's your username?
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="username">Username</label>
+									<input id="username" type="text" class="form-control" name="username" required autofocus>
+									<div class="invalid-feedback">
+										Enter your username
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="email">Email Address</label>
+									<input id="email" type="email" class="form-control" name="email" required>
+									<div class="invalid-feedback">
+										Your email is invalid
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+									<div class="invalid-feedback">
+										Password is required
+									</div>
+								</div>
+
+								<div class="form-group">
+									Register as
+									  <div class="form-check">
+										<input class="form-check-input" id="instructor" type="radio" th:value="INSTRUCTOR" name="role" required>
+										<label class="form-check-label" for="instructor"> Instructor </label>
+									  </div>
+									  <div class="form-check">
+										<input class="form-check-input" id="client" type="radio" th:value="CLIENT" name="role" required>
+										<label class="form-check-label" for="client"> Client </label>
+									  </div>
+									<div class="invalid-feedback">
+										Password is required
+									</div>
+								</div>
+
+								<div class="form-group m-0" style="margin-top:30px;">
+									<button style="width:100%;margin-top:30px;" type="submit" class="btn btn-primary btn-block">
+										Register
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Already have an account? <a th:href="@{/login}">Login</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script th:src="@{js/bootstrap.min.js}" ></script>
+	<script th:src="@{js/login.js}"></script>
+</body>
+</html>

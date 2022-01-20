@@ -2,18 +2,22 @@ package com.groupproject.softwaretu.security;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.groupproject.softwaretu.Enrollement;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,6 +45,10 @@ public class User implements UserDetails {
 
     @NotNull
     private String role;
+
+
+    @OneToMany(mappedBy = "client")
+    Set<Enrollement> registrations;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

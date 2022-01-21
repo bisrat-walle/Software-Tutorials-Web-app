@@ -7,39 +7,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Software Tutorials</title>
 	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-	<link th:href="@{css/search.css}" rel="stylesheet">
+	<link th:href="@{css/style.css}" rel="stylesheet">
 
 </head>
-
-<body data-spy="scroll" data-target=".main-nav">
-
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img th:src="@{/images/logo.png}"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" th:href="@{/home.html}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/login.html}">Login</a>
-        </li>
-    </div>
-  </div>
-</nav>
+<body class="bg-image" data-spy="scroll" data-target=".main-nav" 
+style="background-image: url(https://th.bing.com/th/id/R.2344bee0ee8bfa107a66200c55de77bc?rik=eaIT1sksBOZYYQ&pid=ImgRaw&r=0)">
+	<nav class="navbar navbar-expand-sm navbar-light bg-light bg-image"
+    style="background-image: url(https://th.bing.com/th/id/R.2344bee0ee8bfa107a66200c55de77bc?rik=eaIT1sksBOZYYQ&pid=ImgRaw&r=0)">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#"><img class="img-fluid " style="width:6rem" th:src="@{/images/logo.png}"></a>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			  <li class="nav-item">
+				<a class="nav-link fw-bold " aria-current="page" th:href="@{/home.html}">Home</a>
+			  </li>
+		  <li class="nav-item">
+			<a class="nav-link fw-bold "  href="@{/login.html}">Login</a>
+			</li>
+		  </div>
+		</div>
+	</nav>
 <div class="input-group">
-    <h1 class="sea-tuto">Search for tutorials here</h1>
-            <div class="search-search">
-            <form action="http://www.google.com/search" method="get">
-                <input class="text" type="text" name="q"/>
-                <input class="submit" type="submit" value="search" />
-            </form>
-              </div>
-</div>
-    
+    <h1 class="display-1 text-center text-white fw-bold ">Search for tutorials here</h1>
+    <form  method="get">
+        <div class="col-sm-10  text-center">
+            <input class="text" type="text" style="width:29em;height:4em;border-radius: 2em;" name="q"/>
+            <input class="submit" type="submit" style="width:8em;height:3em;border-radius:2em" value="search" />
+            </div>
+    </form>
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
 </body>

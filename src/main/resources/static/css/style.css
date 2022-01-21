@@ -1,0 +1,12 @@
+ .navbar-expand-sm .navbar-collapse{
+    display: flex!important;
+    flex-basis: auto;
+    position: absolute;
+    right: 30px;
+    color:blueviolet
+  }
+
+  .navbar-nav me-auto mb-2 mb-lg-0{
+      color:blue;
+  }
+

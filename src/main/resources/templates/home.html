@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Software Tutorials</title>
 	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-	<link th:href="@{css/style.css}" rel="stylesheet">
+	<link th:href="@{css/home.css}" rel="stylesheet">
 
 
 </head>
@@ -17,20 +17,14 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img th:src="@{/images/logo.png}"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" th:href="@{login.html}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/register.html}">Register</a>
+          <a class="nav-link" aria-current="page" th:href="@{home.html}">Home</a>
         </li>
 		<li class="nav-item">
-          <a class="nav-link" href="@{about.html}">About us</a>
-        </li>
+			<a class="nav-link" href="@{about.html}">Login</a>
+		  </li>
     </div>
   </div>
 </nav>
@@ -51,9 +45,7 @@
 							</div>
 							<div class="explore">
 								<ul>
-							<li><h5>click login link at the top of the page to explore tutorials</h5></li>
-							<li><h5>click register link at the top of the page to register for tutorials</h5></li>
-							<li><h5>click about link at the top of the page to contact us</h5></li>
+							<li><h4>click login link at the top of the page to explore tutorials</h4></li>
 							    </ul>
 							</div>
 

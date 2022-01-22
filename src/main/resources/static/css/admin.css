@@ -42,9 +42,9 @@ body,button{
         overflow: auto !important;
     }
 
-    /* main{
-        margin-left: var(--sidebar-width);
-    } */
+    main{
+        margin-left: 280px;
+    }
 
     .sidebar-backdrop::before{
         display: none;

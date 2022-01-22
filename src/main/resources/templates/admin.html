@@ -15,7 +15,7 @@
 <body>
 
     <!-- navigation start-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white fixed-top">
         <div class="container-fluid">
 
             <!-- side bar dashes -->
@@ -71,7 +71,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-3 active">
+                        <a href="#dash" class="nav-link px-3 active">
                             <span class="me-2">
                                 <i class="bi bi-speedometer"></i>
                             </span>
@@ -127,12 +127,32 @@
             </nav>
              
       </div>
+      </div>
     <!-- side navbar end -->
 
     <!-- main page -->
     <main class="mt-5 pt-3">
-        <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, quam.</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 fw-bold fs-3"><span id="dash">Dashboard
+
+                </span></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Users
+                        </div>
+
+                        <div class="card-body">
+                            <canvas class="chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <!-- main page ends -->
 
@@ -143,6 +163,7 @@
 
     <script src="../static/js/bootstrap.bundle.min.js"></script>
     <script src="../static/js/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="../static/js/jquery.dataTables.min.js"></script>
     <script src="../static/js/dataTables.bootstrap5.min.js"></script>
     <script src="../static/js/admin.js"></script>

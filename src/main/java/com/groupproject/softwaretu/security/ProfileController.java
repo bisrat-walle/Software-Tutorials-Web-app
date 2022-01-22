@@ -46,8 +46,10 @@ public class ProfileController {
             log.info("user "+user);
             // userRepository.save(user);
         } else {
+            log.info("user "+user);
+            model.addAttribute("user", user);
             model.addAttribute("error", "incorrect password");
-            return "editProfile";
+            return "redirect:/editProfile?error";
         }
 
         

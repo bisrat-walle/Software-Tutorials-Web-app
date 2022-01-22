@@ -27,12 +27,11 @@
     </div>
   </nav>
 
-  
 	<form th:method="POST" th:object="${newTutorial}">
 		<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 		<div class="mb-3">
 		  <div>
-          <label for="title" class="form-label mt-2">Name your taco</label>
+          <label for="title" class="form-label mt-2">Enter title</label>
           <input
             type="text"
             th:class="|form-control ${#fields.hasErrors('title')? 'is-invalid': 'is-valid'}|"
@@ -55,6 +54,21 @@
 		   rows="3">
 		</textarea>
 		</div>
+        <h5 class="form-label">Project (optional)</h5>
+        <div class="mb-3">
+
+            <label for="project_title"
+                   class="form-label">Enter project title here</label>
+            <input class="form-label mt-2" type="text" name="project_title" id="project_title">
+            <label class="form-label mt-2" for="project_statement"></label>
+            <textarea
+                    class="form-label mt-2"
+                    name="project_statement"
+                    id="project_statement"
+                    rows="3">
+		  </textarea>
+        </div>
+
 		
 		<button type="submit" class="btn btn-primary mt-2">
           Add Tutorial

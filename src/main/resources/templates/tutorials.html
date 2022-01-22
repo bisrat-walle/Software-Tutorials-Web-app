@@ -19,8 +19,13 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" th:href="@{tutorials/mytutorials}">My Tutorials</a>
           </li>
+
+          <a th:href="@{/profile}" class="btn btn-primary">My Profile</a>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{../logout}">Logout</a>
+            <form method="POST" th:action="@{../logout}">
+              <button type="submit" class="nav-link">Logout</button>
+            </form>
+
           </li>
       </div>
     </div>
@@ -32,7 +37,14 @@
       <div th:class="card-body">
         <h5 class="card-title" th:text="${tutorial.getTitle()}">Tutorial Title</h5>
         <p class="card-text" th:text="${tutorial.getContent()}">Tutorial Content</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>
+
+        <form method="POST" th:action="@{/enroll}" th:object="${newEnrollement}">
+
+          <input type="hidden" name="tutorialId" th:value="${tutorial.tutorialId}">
+          <button type="submit" class="btn btn-primary">Enroll</button>
+
+        </form>
       </div>
     </div>
 

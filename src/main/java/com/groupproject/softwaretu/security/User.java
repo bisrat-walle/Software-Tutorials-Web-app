@@ -4,20 +4,18 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import com.groupproject.softwaretu.tutorial.Tutorial;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.groupproject.softwaretu.Enrollement;
+import com.groupproject.softwaretu.enrollement.Enrollement;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,14 +44,26 @@ public class User implements UserDetails {
     @NotNull
     private String role;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    @Column(nullable = true)
+    Set<Enrollement> enrollements;
 
-    @OneToMany(mappedBy = "client")
-    Set<Enrollement> registrations;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER)
+    @Column(nullable = true)
+    Set<Tutorial> tutorials;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_"+this.role));
     }
+
+     public User getUser() {
+        return this;
+     }
 
     @Override
     public boolean isAccountNonExpired() {

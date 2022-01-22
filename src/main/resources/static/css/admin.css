@@ -36,6 +36,13 @@ body,button{
     color: lightgray;
 }
 
+.sign{
+    /* background-color: rgb(17, 119, 153); */
+    opacity: 0.5;
+    color: blue;
+    text-decoration: underline;
+}
+
 @media screen and (min-width:992px){
 
     body {

@@ -3,6 +3,7 @@ package com.groupproject.softwaretu.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,9 @@ public class ProfileController {
 
     @Autowired
     private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/profile")
     public String getProfile(Model model){
@@ -39,7 +42,7 @@ public class ProfileController {
         // log.info(""+());
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (user.getPassword() == bCryptPasswordEncoder.encode(form.getPassword())){
+        if (user.getPassword() == passwordEncoder.encode(form.getPassword())){
             log.info("user "+user);
             // userRepository.save(user);
         } else {

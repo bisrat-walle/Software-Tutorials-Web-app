@@ -35,11 +35,13 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .authorizeRequests()
+                .antMatchers("/tutorials/enrolled").hasRole("CLIENT")
+                .antMatchers("/tutorials/mytutorials").hasRole("INSTRUCTOR")
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/tutorials/all")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")

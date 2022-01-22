@@ -1,0 +1,59 @@
+
+/* dashboard */
+/* <i class="bi bi-speedometer"></i> */
+/* people */
+/* <i class="bi bi-people-fill"></i> */
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,400;1,300;1,500&family=Lobster&family=Permanent+Marker&display=swap');
+body,button{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+:root{
+    --sidebar-width:270px;
+    --sidebarHeight: 57px;
+}
+
+.sidebar-nav{
+    width: var(--sidebar-width);
+}
+
+.sidebar-col{
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-col .right-shift {
+    display:inline-flex;
+    transition: all ease 0.25s;
+}
+
+.sidebar-col[aria-expanded="true"] .right-shift{
+    transform: rotate(180deg);
+}
+
+.admin-control{
+    color: lightgray;
+}
+
+@media screen and (min-width:992px){
+
+    body {
+        overflow: auto !important;
+    }
+
+    main{
+        margin-left: 280px;
+    }
+
+    .sidebar-backdrop::before{
+        display: none;
+    }
+    .sidebar-nav{
+        transform: none;
+        visibility: visible !important;
+        top: var(--sidebarHeight);
+        height: calc(100% - var(--sidebarHeight));
+
+    }
+}

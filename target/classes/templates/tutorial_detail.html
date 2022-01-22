@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tutorial Detail</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}">
+</head>
+<body>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${tutorial.title}"></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Enjoy your tutorial</h6>
+            <p class="card-text" th:text="${tutorial.title}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+
+            <h4>Project</h4>
+            <div>
+                <h2 th:text="${tutorial.project.title}"></h2>
+                <p th:text="${tutorial.project.problemStatement}"></p>
+            </div>
+
+            <form method="POST">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <label for="projectUrl">Enter the github link to submit the project</label>
+                <input type="url" required id="projectUrl" name="projectUrl">
+                <input type="hidden" th:value="${tutorial.tutorialId}" name="tutorialId">
+                <button type="submit">Submit project</button>
+            </form>
+
+            <a th:href="@{/tutorials}" class="card-link">Back to tutorials</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+
+
+    </div>
+
+    <script th:src="@{js/bootstrap.min.js}" ></script>
+    <script th:src="@{js/bootstrap.bundle.min.js}" ></script>
+</body>
+</html>

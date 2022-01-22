@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Create tutorial</title>
+	<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img th:src="@{../images/logo.png}"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" th:href="@{tutorials/mytutorials}">My Tutorials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{../logout}">Logout</a>
+          </li>
+      </div>
+    </div>
+  </nav>
+
+	<form th:method="POST" th:object="${newTutorial}">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+		<div class="mb-3">
+		  <div>
+          <label for="title" class="form-label mt-2">Enter title</label>
+          <input
+            type="text"
+            th:class="|form-control ${#fields.hasErrors('title')? 'is-invalid': 'is-valid'}|"
+            class="form-control w-50"
+            th:field="*{title}"
+          />
+          <div
+            class="invalid-feedback"
+            th:if="${#fields.hasErrors('title')}"
+            th:errors="*{title}"
+          ></div>
+		  </div>
+		</div>
+		<div class="mb-3">
+		  <label for="content" 
+		  class="form-label">Enter the tutorial content below</label>
+		  <textarea 
+		   th:field="*{content}" 
+		   th:class="|form-control ${#fields.hasErrors('content')? 'is-invalid': 'is-valid'}|"
+		   rows="3">
+		</textarea>
+		</div>
+        <h5 class="form-label">Project (optional)</h5>
+        <div class="mb-3">
+
+            <label for="project_title"
+                   class="form-label">Enter project title here</label>
+            <input class="form-label mt-2" type="text" name="project_title" id="project_title">
+            <label class="form-label mt-2" for="project_statement"></label>
+            <textarea
+                    class="form-label mt-2"
+                    name="project_statement"
+                    id="project_statement"
+                    rows="3">
+		  </textarea>
+        </div>
+
+		
+		<button type="submit" class="btn btn-primary mt-2">
+          Add Tutorial
+        </button>
+	</form>
+
+
+    <script th:src="@{../js/bootstrap.bundle.min.js}" ></script>
+    <script th:src="@{../js/bootstrap.min.js}" ></script>
+
+</body>
+
+</html>

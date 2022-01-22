@@ -1,0 +1,11 @@
+.home-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.tutorial-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 50px;
+}

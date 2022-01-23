@@ -19,6 +19,11 @@
 						<div class="card-body">
 							<h4 class="card-title">Register</h4>
 							<form method="POST" class="my-login-validation" novalidate="" th:action="@{/register}" id="registerForm">
+								
+								<div th:if="${param.error}" class="alert alert-danger" th:text="${exception}">
+								Invalid username or email.
+								</div>
+								
 								<div class="form-group">
 									<label th:for="fullName">Full Name</label>
 									<input id="fullName" type="text" class="form-control" name="fullName" required autofocus>

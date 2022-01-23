@@ -1,6 +1,7 @@
 package com.groupproject.softwaretu.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,12 @@ public class RegistrationController {
 
     @GetMapping
     public String register(){
-        return "signup";
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return "redirect:/";
+        } catch (ClassCastException e){
+            return "signup";
+        }
     }
 
     @PostMapping

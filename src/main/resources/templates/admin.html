@@ -153,10 +153,11 @@ xmlns:th="http://www.thymeleaf.org">
 
                         <div class="card-body">
                             <canvas class="chart" width="300" height="200"></canvas>
-							<div>Instructors <span></span></div>
-							<div>Clients <span></span></div>
-							<div>Tutorials <span></span></div>
-							<div>Enrollements <span></span></div>
+							<div>Instructors <span th:text="${totalInstructor.size()}"></span></div>
+							<div>Clients <span th:text="${totalClient.size()}"></span></div>
+							<!-- <div>Tutorials <span th:text="${totalTutorial.size()}"></span></div> -->
+							<div>Enrollements <span th:text="${totalEnrollement.size()}"></span></div>
+                            <div>Projects <span th:text="${totalProject.size()}"></span></div>
                         </div>
                     </div>
                 </div>
@@ -167,25 +168,31 @@ xmlns:th="http://www.thymeleaf.org">
                  <div class="col-md-12">
                      <div class="card">
                          <div class="card-header">
-                             USER/TUTORIAL ENTRIES
+                             MANAGE USERS
                          </div>
                          <div class="card-body">
                              <div class="table-responsive">
                                  <table id="example" class="table table-striped data-table" style="width: 100%;">
                                      <thead>
                                          <tr>
-                                             <th>Enrolled Names</th>
-                                             <th>E-Mails </th>
-                                             <th>Course</th>
-                                             <th>Projects Done</th>
+                                             <th>Full Name</th>
+                                             <th>Username </th>
+                                             <th>Role</th>
+                                             <th>Action/th>
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         <tr>
-                                             <td>Abel Yohannes</td>
-                                             <td>abelyohannes@gmail.com</td>
-                                             <td>JAVA</td>
-                                             <td>Four(4)</td>
+
+                                         <tr th:each="user : ${users}">
+                                             <td th:text="*{user.getFullName()}"></td>
+                                             <td th:text="*{user.getEmail()}"></td>
+                                             <td th:text="*{user.getRole()}"></td>
+                                             <td>
+                                                 <form method="POST" th:action="@{/user/delete}">
+                                                    <input type="hidden" th:value="${user.getId()}" name="userId" id="userId">
+                                                    <button type="submit" class="btn btn-danger ">DELETE</button>
+                                                 </form>
+                                             </td>
                                          </tr>
                                      </tbody>
                                      <tfoot>

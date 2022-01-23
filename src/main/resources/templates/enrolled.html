@@ -17,9 +17,23 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <li class="nav-item">
-                    <a th:href="@{/tutorials/enrolled}" class="nav-link fw-bold ">Enrolled Tutorials</a>
-                </li>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+             
+                    <li class="nav-item dropdown">
+                      <a class="nav-link fw-bold dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #747475;">
+                        Tutorials<i class="bi bi-person-circle"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" >
+                        <li class="nav-item">
+                            <a th:href="@{/tutorials/enrolled}" class="nav-link fw-bold ">Enrolled Tutorials</a>
+                        </li>
+                        <li class="nav-item" th:if="${loggedIn}">
+                            <a th:href="@{/tutorials/all}" class="nav-link fw-bold ">All Tutorials</a>
+                        </li>
+                      </ul>
+                    </li>
+                  
+                </ul>
 
 
                 <li class="nav-item" th:if="${loggedIn}">
@@ -71,6 +85,8 @@
 </div>
     <script th:src="@{../js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{../js/bootstrap.min.js}"></script>
+    <script th:src="@{../js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{../js/jquery-3.6.0.js}"></script>
 
 </body>
 </html>

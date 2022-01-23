@@ -40,7 +40,7 @@ public class Tutorial implements Serializable {
     @JoinColumn(name = "project_id", referencedColumnName = "projectId")
     private Project project;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor", nullable = true, referencedColumnName="id")
     User instructor;
 

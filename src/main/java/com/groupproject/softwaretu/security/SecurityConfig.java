@@ -40,19 +40,24 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
-                .authorizeRequests()
-                .antMatchers("/", "/**").permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .and()
-                .rememberMe().userDetailsService(this.userDetailsService(this.userRepository))
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .and()
-                .build();
+            .authorizeRequests()
+            .antMatchers("/tutorials/enrolled").hasRole("CLIENT")
+            .antMatchers("/tutorials/mytutorials").hasRole("INSTRUCTOR")
+            .antMatchers("/tutorials/create").hasRole("INSTRUCTOR")
+            .antMatchers("/admin").hasRole("ADMIN")
+            .antMatchers("/profile").hasRole("ADMIN")
+            .antMatchers("/profile").hasRole("CLIENT")
+            .antMatchers("/profile").hasRole("INSTRUCTOR")
+            .antMatchers("/", "/**").permitAll()
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .defaultSuccessUrl("/tutorials/all")
+            .and()
+            .logout()
+            .logoutSuccessUrl("/")
+            .and()
+            .build();
     }
 
 }

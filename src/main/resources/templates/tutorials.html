@@ -19,16 +19,32 @@
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item" th:if="${!isInstructor}">
-            <a th:href="@{/tutorials/enrolled}" class="nav-link fw-bold ">Enrolled Tutorials</a>
-          </li>
 
-          <div th:if="${isInstructor}">
-            <li class="nav-item" >
-              <a th:href="@{/tutorials/mytutorials}" class="nav-link fw-bold ">My Tutorials</a>
+          <ul class="navbar-nav mb-2 mb-lg-0">
+             
+            <li class="nav-item dropdown">
+              <a class="nav-link fw-bold dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #747475;">
+                Tutorials<i class="bi bi-person-circle"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" >
+                <li class="nav-item" th:if="${!isInstructor}">
+                  <a th:href="@{/tutorials/enrolled}" class="nav-link fw-bold ">Enrolled Tutorials</a>
+                </li>
+                  <li class="nav-item" th:if="${isInstructor}">
+                    <a th:href="@{/tutorials/create}" class="nav-link fw-bold ">Create Tutorial</a>
+                  </li>
+                  <li class="nav-item" th:if="${isInstructor}">
+                    <a th:href="@{/tutorials/mytutorials}" class="nav-link fw-bold ">My Tutorials</a>
+                  </li>
+                  <li class="nav-item" th:if="${loggedIn}">
+                    <a th:href="@{/tutorials/all}" class="nav-link fw-bold ">All Tutorials</a>
+                </li>
+              </ul>
             </li>
+          
+        </ul>
 
-          </div>
+          
           
 
           <li class="nav-item" th:if="${loggedIn}">
@@ -59,7 +75,7 @@
         <p class="card-text" th:text="${tutorial.getContent()}">Tutorial Content</p>
 
         <div class="tutorial-botton-container">
-          <a th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>
+          <a th:if="${isInstructor} or ${enrollementChecker.check(tutorial)}" th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>
 
           <div th:if="${!isInstructor}">
             <form th:if="${!enrollementChecker.check(tutorial)}" method="POST" th:action="@{/enroll}" th:object="${newEnrollement}">
@@ -92,6 +108,8 @@
 
     <script th:src="@{../js/bootstrap.bundle.min.js}" ></script>
     <script th:src="@{../js/bootstrap.min.js}" ></script>
+    <script th:src="@{../js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{../js/jquery-3.6.0.js}"></script>
 
 </body>
 

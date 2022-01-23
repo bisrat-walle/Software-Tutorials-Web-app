@@ -41,13 +41,14 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
             .authorizeRequests()
-            .antMatchers("/tutorials/enrolled").hasRole("CLIENT")
+            .antMatchers("/tutorials/enrolled").hasAnyRole("ADMIN", "CLIENT")
             .antMatchers("/tutorials/mytutorials").hasRole("INSTRUCTOR")
             .antMatchers("/tutorials/create").hasRole("INSTRUCTOR")
+            .antMatchers("/tutorials/edit").hasRole("INSTRUCTOR")
+            .antMatchers("/tutorials/all").hasAnyRole("ADMIN", "INSTRUCTOR", "CLIENT")
             .antMatchers("/admin").hasRole("ADMIN")
-            .antMatchers("/profile").hasRole("ADMIN")
-            .antMatchers("/profile").hasRole("CLIENT")
-            .antMatchers("/profile").hasRole("INSTRUCTOR")
+            .antMatchers("/profile").hasAnyRole("ADMIN", "INSTRUCTOR", "CLIENT")
+            .antMatchers("/profile/edit").hasAnyRole("ADMIN", "INSTRUCTOR", "CLIENT")
             .antMatchers("/", "/**").permitAll()
             .and()
             .formLogin()

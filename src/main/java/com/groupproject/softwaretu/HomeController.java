@@ -24,4 +24,23 @@ public class HomeController {
         model.addAttribute("loggedIn", loggedIn);
         return "home";
     }
+	
+	@GetMapping("/admin")
+    public String admin(Model model) {
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+		model.addAttribute("user", loggedIn);
+		model.addAttribute("totalEnrollement", loggedIn);
+		model.addAttribute("totalClient", loggedIn);
+		model.addAttribute("totalInstructor", loggedIn);
+		model.addAttribute("users", loggedIn);
+		model.addAttribute("totalProjects", loggedIn);
+        return "admin";
+    }
 }

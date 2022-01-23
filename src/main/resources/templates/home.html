@@ -82,7 +82,8 @@ text-center fw-bold  py-sm-4" >Here is the best place for...</p>
 	</div>
 </div>
 
-<div class="display-5 py-sm-3 text-center">
+
+<div class="display-5 py-sm-3 text-center; transform: scale(1.5); margin-top: 30px;">
 
 	<a th:if="${loggedIn}" th:href="@{/tutorials/all}" class="btn btn-main btn-primary">Explore Tutorials ... </a>
 	<a th:if="${!loggedIn}" th:href="@{/login}" class="btn btn-main btn-primary">Explore Tutorials ... </a>

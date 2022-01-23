@@ -20,8 +20,12 @@
 							<h4 class="card-title">Update Profile</h4>
 							<form method="POST" class="my-login-validation" th:object="${user}" novalidate="" id="registerForm">
 								<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                                <input id="userId" th:value="*{getId()}" type="number" class="form-control" name="userId" required autofocus>
-                                <div class="form-group">
+                                <input id="userId" th:value="*{getId()}" type="hidden" class="form-control" name="userId" required autofocus>
+
+								<div th:if="${param.error}" class="alert alert-danger">
+									Incorrect password.
+								</div>
+								<div class="form-group">
 									<label th:for="fullName">Full Name</label>
 									<input id="fullName" th:value="*{getFullName()}" type="text" class="form-control" name="fullName" required autofocus>
 									<div class="invalid-feedback">
@@ -70,6 +74,10 @@
 			</div>
 		</div>
 	</section>
+
+	<div class="text-center" style="margin:50px;">
+		&copy; Copyright All rights reserved!
+	</div>
 
 	<script th:src="@{../js/bootstrap.min.js}" ></script>
 	<script th:src="@{../js/login.js}"></script>

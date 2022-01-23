@@ -5,30 +5,62 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My profile</title>
+    <title>Enrolled Tutorials</title>
     <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{css/style.css}" rel="stylesheet">
 </head>
 <body>
 
+<nav class="navbar navbar-expand-sm navbar-light bg-light ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img class="img-fluid " style="width:6rem" th:src="@{/images/logo.png}"></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item" th:if="${loggedIn}">
+                    <a th:href="@{/tutorials/all}" class="nav-link fw-bold ">Explore Tutorials ... </a>
+                </li>
+
+                <li class="nav-item" th:if="${!loggedIn}">
+                    <a th:href="@{/login}" class="nav-link fw-bold ">Explore Tutorials ... </a>
+                </li>
+
+                <li class="nav-item" th:if="${loggedIn}">
+                    <a class="nav-link fw-bold " aria-current="page" th:href="@{/profile}">My Profile</a>
+                </li>
+
+                <li class="nav-item" th:if="${!loggedIn}">
+                    <a class="nav-link fw-bold " aria-current="page" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item" th:if="${!loggedIn}">
+                    <a class="nav-link fw-bold "  th:href="@{/login}">Login</a>
+                </li>
+                <form method="POST" th:action="@{/logout}" th:if="${loggedIn}">
+                    <li class="nav-item">
+                        <button style="background:none;border:none;" type="submit" class="nav-link fw-bold ">Logout</button>
+                    </li>
+                </form>
+                </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="card" style="width: 18rem;" th:object="${user}">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${user.getFullName()}">Card title</h5>
+        <h6 class="card-subtitle mb-2 text-muted" th:text="${user.getUsername()}">Card subtitle</h6>
+        <p class="card-text">Enrolled: <span></span></p>
 
-    <h3>Your Profile is here</h3>
 
-    <img th:src="@{../images/tutorial_image.PNG}" th:class="card-img-top" alt="tutorial image">
-    <div th:class="card-body">
-        Name<h5 class="card-title" th:text="${user.getFullName()}">Tutorial Title</h5>
-        UserName<h4 class="card-text" th:text="${user.getUsername()}">Tutorial Content</h4>
-
-        <form method="POST">
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-<!--            <input type="hidden" name="tutorialId" th:value="${tutorial.tutorialId}">-->
-            <button type="submit" class="btn btn-primary">edit</button>
-
-        </form>
+            <!--            <input type="hidden" name="tutorialId" th:value="${tutorial.tutorialId}">-->
+            <a th:href="@{/profile/edit}" class="card-link">edit profile</a>
+            <a th:href="@{/tutorials/all}" class="card-link">Back to tutorials</a>
     </div>
 </div>
 
+
+<div class="text-center" style="margin:50px;">
+    &copy; Copyright All rights reserved!
 </div>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

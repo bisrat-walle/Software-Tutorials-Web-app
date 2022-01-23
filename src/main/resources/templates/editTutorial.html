@@ -52,6 +52,7 @@
               th:class="|form-control ${#fields.hasErrors('title')? 'is-invalid': 'is-valid'}|"
               type="text"
               th:field="*{title}"
+              th:value="*{title}"
           />
           <div
               class="invalid-feedback"
@@ -64,8 +65,9 @@
 		  <label for="content" 
 		  class="form-label">Enter the tutorial content below</label>
 		  <textarea 
-		   th:field="*{content}" 
-		   th:class="|form-control ${#fields.hasErrors('content')? 'is-invalid': 'is-valid'}|"
+		   th:field="*{content}"
+           th:value="*{content}"
+           th:class="|form-control ${#fields.hasErrors('content')? 'is-invalid': 'is-valid'}|"
 		   rows="10">
 		</textarea>
 		</div>
@@ -76,7 +78,7 @@
 
             <label for="project_title"
                    class="form-label">Enter project title here</label>
-            <input style="max-width:500px" class="form-control is-valid mt-2" type="text" name="project_title" id="project_title">
+            <input class="form-control is-valid mt-2" type="text" name="project_title" id="project_title">
             <label class="form-label mt-2" for="project_statement">Please clearly state problem statement below</label>
             <textarea
                     class="form-control is-valid mt-2"
@@ -88,7 +90,7 @@
 
 		<div class="text-center">
             <button type="submit" class="btn btn-primary mt-2">
-                Add Tutorial
+                Update Tutorial
             </button>
         </div>
 

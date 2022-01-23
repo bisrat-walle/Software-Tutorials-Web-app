@@ -29,7 +29,7 @@ public class EnrollementController {
     public String enroll(@Valid Enrollement newEnrollement, Errors errors, @RequestParam Long tutorialId) {
 
         if (errors.hasErrors()) {
-            return "/tutorials/all";
+            return "redirect:/tutorials/all";
         }
 
         log.info("Processing enrollement" + tutorialId);
@@ -44,7 +44,7 @@ public class EnrollementController {
         newEnrollement.setTutorial(tutorial);
         enrollementRepository.save(newEnrollement);
 
-        return "enrolled";
+        return "redirect:/tutorials/enrolled";
     }
     
 }

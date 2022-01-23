@@ -1,8 +1,10 @@
 package com.groupproject.softwaretu.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +13,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    UserRepository userRepository;
+
     @Bean
     PasswordEncoder bcryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -35,13 +41,13 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .authorizeRequests()
-                .antMatchers("/tutorials/enrolled").hasRole("CLIENT")
-                .antMatchers("/tutorials/mytutorials").hasRole("INSTRUCTOR")
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/tutorials/all")
+                .defaultSuccessUrl("/")
+                .and()
+                .rememberMe().userDetailsService(this.userDetailsService(this.userRepository))
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")

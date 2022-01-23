@@ -9,3 +9,35 @@
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 50px;
 }
+
+ .navbar-expand-sm .navbar-collapse{
+    display: flex!important;
+    flex-basis: auto;
+    position: absolute;
+    right: 30px;
+    color:blueviolet
+  }
+
+  .navbar-nav me-auto mb-2 mb-lg-0{
+      color:blue;
+  }
+
+.tutorial-botton-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+}
+
+@media (max-width:850px){
+.tutorial-container{
+    grid-template-columns: 1fr 1fr;
+}
+}
+
+@media (max-width:450px){
+.tutorial-container{
+    grid-template-columns: 1fr;
+
+}
+}
+

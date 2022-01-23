@@ -6,19 +6,17 @@ import com.groupproject.softwaretu.security.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.Instant;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Data
-public class Tutorial {
+public class Tutorial implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long tutorialId;
@@ -47,6 +45,6 @@ public class Tutorial {
     User instructor;
 
 
-    private LocalDateTime modifedAt;
+    private LocalDateTime modifiedAt;
 
 }

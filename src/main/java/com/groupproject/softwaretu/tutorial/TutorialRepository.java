@@ -16,5 +16,8 @@ public interface TutorialRepository extends CrudRepository<Tutorial, Long> {
 
     @Query("SELECT t FROM Tutorial t WHERE t.instructor = ?#{[0]}")
     Collection<Tutorial> getInstructorTutorials(User instructor);
+
+    @Query("SELECT t.instructor FROM Tutorial t WHERE t = ?#{[0]}")
+    User getInstructor(Tutorial tutorial);
 }
 

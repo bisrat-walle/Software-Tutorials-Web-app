@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,9 @@ public class TutorialController {
     private TutorialRepository tutorialRepository;
 
     @Autowired
+    public EnrollementService enrollementChecker;
+
+    @Autowired
     private ProjectRepository projectRepository;
 
     @Autowired
@@ -35,15 +39,39 @@ public class TutorialController {
 
     @GetMapping("/all")
     public String allTutorials(Model model){
+
+        Boolean loggedIn = true;
+        Boolean isInstructor = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (!user.getRole().equals("INSTRUCTOR")){
+                isInstructor = false;
+            }
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+        model.addAttribute("isInstructor", isInstructor);
         
         Iterable<Tutorial> tutorials = tutorialRepository.findAll();
         model.addAttribute("tutorials", tutorials);
         model.addAttribute("newEnrollement", new Enrollement());
+        model.addAttribute("enrollementChecker", enrollementChecker);
+        model.addAttribute("tutorialRepo", tutorialRepository);
         return "tutorials";
     }
 
     @GetMapping("/enrolled")
     public String enrolledTutorials(Model model){
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+
         Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("enrolledTutorials", enrollementRepository.getEnrolledTutorials(
               (User) ob
@@ -62,11 +90,27 @@ public class TutorialController {
         model.addAttribute("enrolledTutorials", enrollementRepository.getEnrolledTutorials(
                 (User) ob
         ));
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
         return "enrolled";
     }
-	
+
 	@GetMapping("/mytutorials")
     public String myTutorials(Model model){
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
 
         Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("myTutorials",
@@ -78,6 +122,15 @@ public class TutorialController {
 
     @GetMapping("/create")
     public String createTutorial(Model model){
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("newTutorial", new Tutorial());
         return "createTutorial";
@@ -88,10 +141,24 @@ public class TutorialController {
                                   @RequestParam(required = false, name = "project_title")
                                           String projectTitle,
                                   @RequestParam(required = false, name = "project_statement")
-                                  String projectStatement) {
+                                  String projectStatement,
+                                  Model model) {
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+
+
+
 
         if (errors.hasErrors()) {
-            return "createTutorial";
+            model.addAttribute("newTutorial", newTutorial);
+            log.info("Error creating tutorial");
+            return "redirect:/tutorials/create?error";
         }
 
         Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -99,9 +166,12 @@ public class TutorialController {
             newTutorial.setInstructor((User) ob);
         }
 
-        newTutorial.setModifedAt(LocalDateTime.now());
+        newTutorial.setModifiedAt(LocalDateTime.now());
 
-        if (projectTitle != null && projectStatement != null){
+        if (projectTitle != null
+                && projectTitle.length() >= 5
+                && projectStatement != null
+                && projectStatement.length() >= 5){
             log.info("Title "+projectTitle+" statement "+projectStatement);
             Project project = new Project();
             project.setTitle(projectTitle);
@@ -112,13 +182,86 @@ public class TutorialController {
         
 //        log.info("Processing "+newTutorial);
         tutorialRepository.save(newTutorial);
-        return "redirect:/";
+        return "redirect:/tutorials/mytutorials";
+    }
+
+    @GetMapping("/edit")
+    public String editTutorial(@RequestParam(name = "tutorialId") Long id, Model model){
+        Tutorial newTutorial = tutorialRepository.findByTutorialId(id);
+        model.addAttribute("newTutorial", newTutorial);
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+        return "editTutorial";
+    }
+
+    @PostMapping("/edit")
+    public String editTutorial(@Valid Tutorial newTutorial, Errors errors,
+                                  @RequestParam(required = false, name = "project_title")
+                                          String projectTitle,
+                                  @RequestParam(required = false, name = "project_statement")
+                                          String projectStatement,
+                                  Model model) {
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+
+
+
+
+        if (errors.hasErrors()) {
+            model.addAttribute("newTutorial", newTutorial);
+            log.info("Error creating tutorial");
+            return "redirect:/tutorials/create?error";
+        }
+
+        Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if ( ob != null){
+            newTutorial.setInstructor((User) ob);
+        }
+
+        newTutorial.setModifiedAt(LocalDateTime.now());
+
+        if (projectTitle != null
+                && projectTitle.length() >= 5
+                && projectStatement != null
+                && projectStatement.length() >= 5){
+            log.info("Title "+projectTitle+" statement "+projectStatement);
+            Project project = new Project();
+            project.setTitle(projectTitle);
+            project.setProblemStatement(projectStatement);
+            projectRepository.save(project);
+            newTutorial.setProject(project);
+        }
+
+//        log.info("Processing "+newTutorial);
+        tutorialRepository.save(newTutorial);
+        return "redirect:/tutorials/mytutorials";
     }
 
     @GetMapping("/detail/{tutorialId}")
     public String getTutorialDetailsById(@PathVariable("tutorialId") Long tutorialId, Model model){
 
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        model.addAttribute("loggedIn", loggedIn);
+
         model.addAttribute("tutorial", tutorialRepository.findByTutorialId(tutorialId));
+        model.addAttribute("enrollementService", enrollementChecker);
         return "tutorial_detail";
     }
 
@@ -126,6 +269,8 @@ public class TutorialController {
     public String submitProject(@PathVariable("tutorialId") Long tutorialId, Model model,
                                 @RequestParam(name = "projectUrl") String projectUrl){
         Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
 
         Enrollement enrollement = enrollementRepository.getEnrollementFromClientAndTutorial(
                 ((User) ob), tutorialRepository.findByTutorialId(tutorialId));
@@ -137,4 +282,20 @@ public class TutorialController {
     }
 	
 
+}
+
+
+@Service
+class EnrollementService{
+    @Autowired
+    EnrollementRepository enrollementRepository;
+    public boolean check(Tutorial tutorial){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return enrollementRepository.getEnrollementFromClientAndTutorial(user, tutorial) != null;
+    }
+
+    public boolean checkGithubLink(Tutorial tutorial){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return enrollementRepository.getGithubLinkFromClientAndTutorial(user, tutorial) == null;
+    }
 }

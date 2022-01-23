@@ -44,6 +44,9 @@ public class User implements UserDetails {
     @NotNull
     private String role;
 
+//    @Column(name = "reset_password_token", length = 30)
+//    private String resetPasswordToken;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)

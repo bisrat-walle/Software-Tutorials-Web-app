@@ -23,9 +23,13 @@
             <a th:href="@{/tutorials/enrolled}" class="nav-link fw-bold ">Enrolled Tutorials</a>
           </li>
 
-          <li class="nav-item" th:if="${isInstructor}">
-            <a th:href="@{/tutorials/mytutorials}" class="nav-link fw-bold ">My Tutorials</a>
-          </li>
+          <div th:if="${isInstructor}">
+            <li class="nav-item" >
+              <a th:href="@{/tutorials/mytutorials}" class="nav-link fw-bold ">My Tutorials</a>
+            </li>
+
+          </div>
+          
 
           <li class="nav-item" th:if="${loggedIn}">
             <a class="nav-link fw-bold " aria-current="page" th:href="@{/profile}">My Profile</a>
@@ -70,7 +74,7 @@
 
           </div>
 
-          <form th:if="${isInstructor} and ${tutorialRepo.getInstructor(tutorial)}==tutorial.instructor" th:action="@{/tutorials/edit}" th:object="${newEnrollement}">
+          <form th:if="${isInstructor} and ${enrollementChecker.checkTutorialInstructor(tutorial)}">
             <input type="hidden" name="tutorialId" th:value="${tutorial.tutorialId}">
             <button type="submit" class="btn btn-primary">Edit</button>
           </form>

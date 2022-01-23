@@ -48,33 +48,40 @@
 
             <hr>
             <h4>Project</h4>
-            <div>
-                <h4 th:text="${tutorial.project.title}"></h4>
-                <p th:text="${tutorial.project.problemStatement}"></p>
-            </div>
 
-
-            <div th:if="${enrollementService.checkGithubLink(tutorial)}">
-                <form method="POST">
-                    <div th:if="${param.error}" class="alert alert-danger">
-                        Validation Error, Please enter the correct link.
+            <div th:if="${tutorial.project}!=null">
+                <div>
+                    <h4 th:text="${tutorial.project.title}"></h4>
+                    <p th:text="${tutorial.project.problemStatement}"></p>
+                </div>
+    
+    
+                <div th:if="${enrollementService.checkGithubLink(tutorial)}">
+                    <form method="POST">
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Validation Error, Please enter the correct link.
+                        </div>
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                        <label for="projectUrl">Enter the github link to submit the project</label>
+                        <input style="max-width:400px;" class="form-control is-valid" type="url" required id="projectUrl" name="projectUrl">
+                        <input type="hidden" th:value="${tutorial.tutorialId}" name="tutorialId">
+    
+                        <div class="text-left">
+                            <button type="submit" class="btn btn-primary mt-2">
+                                Submit Project
+                            </button>
+                        </div>
+                    </form>
+                    <div th:if="${!enrollementService.checkGithubLink(tutorial)}">
+                        <h5>You have already submitted the project</h5>
                     </div>
-                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                    <label for="projectUrl">Enter the github link to submit the project</label>
-                    <input style="max-width:400px;" class="form-control is-valid" type="url" required id="projectUrl" name="projectUrl">
-                    <input type="hidden" th:value="${tutorial.tutorialId}" name="tutorialId">
-
-                    <div class="text-left">
-                        <button type="submit" class="btn btn-primary mt-2">
-                            Submit Project
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
 
-            <div th:if="${!enrollementService.checkGithubLink(tutorial)}">
-                <h5>You have already submitted the project</h5>
-            </div>
+            <div th:if="${tutorial.project}==null"><h5>This tutorial has no project!</h5></div>
+
+            
+            
 
 
             <a th:href="@{/tutorials/all}" class="card-link">Back to tutorials</a>

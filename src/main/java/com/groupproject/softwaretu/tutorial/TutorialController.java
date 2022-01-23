@@ -289,6 +289,9 @@ public class TutorialController {
 class EnrollementService{
     @Autowired
     EnrollementRepository enrollementRepository;
+
+    @Autowired
+    TutorialRepository tutorialRepository;
     public boolean check(Tutorial tutorial){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return enrollementRepository.getEnrollementFromClientAndTutorial(user, tutorial) != null;
@@ -297,5 +300,10 @@ class EnrollementService{
     public boolean checkGithubLink(Tutorial tutorial){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return enrollementRepository.getGithubLinkFromClientAndTutorial(user, tutorial) == null;
+    }
+
+    public boolean checkTutorialInstructor(Tutorial tutorial){
+        User instructor = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return tutorialRepository.getInstructor(tutorial).equals(instructor);
     }
 }

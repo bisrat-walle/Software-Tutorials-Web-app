@@ -44,3 +44,11 @@
 nav.navbar.navbar-expand-sm.navbar-light.bg-light {
     box-shadow: 0.25em 0.25em 0.75em rgb(0 0 0 / 25%), 0.25em 0.12em 0.25em rgb(0 0 0 / 25%);
 }
+
+
+ul.dropdown-menu.dropdown-menu-end.show{
+    position: absolute !important;
+        inset: unset !important;
+        margin: 0px !important;
+        transform: none !important;
+}

@@ -6,58 +6,71 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Software Tutorials</title>
-	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-	<link th:href="@{/css/home.css}" rel="stylesheet">
+	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{css/style.css}" rel="stylesheet">
 
 
 </head>
 
-<body data-spy="scroll" data-target=".main-nav">
+<body class="bg-color" data-spy="scroll" data-target=".main-nav" >
+	<nav class="navbar navbar-expand-sm navbar-light bg-light ">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#"><img class="img-fluid " style="width:6rem" th:src="@{/images/logo.png}"></a>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			  <li class="nav-item">
+				<a class="nav-link fw-bold " aria-current="page" th:href="@{/home.html}">Home</a>
+			  </li>
+		  <li class="nav-item">
+			<a class="nav-link fw-bold "  href="@{/login.html}">Login</a>
+			</li>
+		  </div>
+		</div>
+	</nav>
+<p class=" mt-4 display-3  
+text-center fw-bold  py-sm-4" >Here is the best place for...</p>
 
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img th:src="@{/images/logo.png}"></a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" th:href="@{home.html}">Home</a>
-        </li>
-		<li class="nav-item">
-			<a class="nav-link" th:href="@{/about.html}">Login</a>
-		  </li>
+<div class="row">
+  <div class="col-md-6 col-lg-4">
+    <div class="card"><img class="card-img-top img-fluid" th:src="@{/images/sucess.png}" />	
     </div>
   </div>
-</nav>
-	<section class="home" id="home" data-stellar-background-ratio="0.4">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="st-home-unit">
-						<div class="hero-txt">
-							<div class="p-image">
-							<p class="hero-work"> Here is the bEST place for</p>
-							<img th:src="@{/images/sucess.png}" />
-							<img th:src="@{/images/news.png}" />
-							<img th:src="@{/images/know.png}" />
-							<img th:src="@{/images/R.png}" />
-							<img th:src="@{/images/capacity.png}" />
-							<img th:src="@{/images/class.png}" />
-							</div>
-							<div class="explore">
-								<ul>
-							<li><h4>click login link at the top of the page to explore tutorials</h4></li>
-							    </ul>
-							</div>
+  <div class="col-md-6 col-lg-4">
+    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/news.png}"/>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4">
+    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/know.png}" />  
+    </div>
+  </div>
 
+  <div class="col-md-6 col-lg-4">
+    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/R.png}" />
+      
+    </div>
+  </div>
 
-						</div>
+  <div class="col-md-6 col-lg-4">
+    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/capacity.png}" />
+      
+    </div>
+  </div>
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
+  <div class="col-md-6 col-lg-4">
+    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid"  th:src="@{/images/class.png}" />
+      
+    </div>
+  </div>
+</div>
+	
+		<div class="display-5 py-sm-3">
+				
+				<h4>click login link at the top of the page to explore tutorials</h4>
+			    
+	    </div>
+              
+</div>
+			
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
 </body>

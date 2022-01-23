@@ -14,7 +14,7 @@ Our project is a web application that allows users to
 In this project we have three types of users
 	1. Clients
 	2. Instructors
-	3. Admin
+	3. Admins
 </pre>
 
 

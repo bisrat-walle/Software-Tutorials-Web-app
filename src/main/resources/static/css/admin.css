@@ -36,11 +36,8 @@ body,button{
     color: lightgray;
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> origin/main
 @media screen and (min-width:992px){
 
     body {
@@ -61,7 +58,6 @@ body,button{
         height: calc(100% - var(--sidebarHeight));
 
     }
-<<<<<<< HEAD
 	
 
 }
@@ -71,6 +67,7 @@ body,button{
 		display: block;
 	}
 }
-=======
+
+div#offcanvasExample {
+    background-color: #065656 !important;
 }
->>>>>>> origin/main

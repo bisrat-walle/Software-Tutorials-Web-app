@@ -9,11 +9,12 @@
 	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{css/style.css}" rel="stylesheet">
 
+	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+
 
 </head>
 
 <body class="bg-color" data-spy="scroll" data-target=".main-nav" >
-<<<<<<< HEAD
 <nav class="navbar navbar-expand-sm navbar-light bg-light ">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="#"><img class="img-fluid " style="width:6rem" th:src="@{/images/logo.png}"></a>
@@ -84,7 +85,7 @@ text-center fw-bold  py-sm-4" >Here is the best place for...</p>
 </div>
 
 
-<div class="display-5 py-sm-3 text-center; transform: scale(1.5); margin-top: 30px;">
+<div class="display-5 py-sm-3 text-center" style="transform: scale(1.5); margin-top: 30px;">
 
 	<a th:if="${loggedIn}" th:href="@{/tutorials/all}" class="btn btn-main btn-primary">Explore Tutorials ... </a>
 	<a th:if="${!loggedIn}" th:href="@{/login}" class="btn btn-main btn-primary">Explore Tutorials ... </a>
@@ -98,67 +99,6 @@ text-center fw-bold  py-sm-4" >Here is the best place for...</p>
 </div>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-=======
-	<nav class="navbar navbar-expand-sm navbar-light bg-light ">
-		<div class="container-fluid">
-		  <a class="navbar-brand" href="#"><img class="img-fluid " style="width:6rem" th:src="@{/images/logo.png}"></a>
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			  <li class="nav-item">
-				<a class="nav-link fw-bold " aria-current="page" th:href="@{/home.html}">Home</a>
-			  </li>
-		  <li class="nav-item">
-			<a class="nav-link fw-bold "  href="@{/login.html}">Login</a>
-			</li>
-		  </div>
-		</div>
-	</nav>
-<p class=" mt-4 display-3  
-text-center fw-bold  py-sm-4" >Here is the best place for...</p>
-
-<div class="row">
-  <div class="col-md-6 col-lg-4">
-    <div class="card"><img class="card-img-top img-fluid" th:src="@{/images/sucess.png}" />	
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-4">
-    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/news.png}"/>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-4">
-    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/know.png}" />  
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/R.png}" />
-      
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid" th:src="@{/images/capacity.png}" />
-      
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card"><img alt="Card image cap" class="card-img-top img-fluid"  th:src="@{/images/class.png}" />
-      
-    </div>
-  </div>
-</div>
-	
-		<div class="display-5 py-sm-3">
-				
-				<h4>click login link at the top of the page to explore tutorials</h4>
-			    
-	    </div>
-              
-</div>
-			
-	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
->>>>>>> origin/main
 
 </body>
 </html>

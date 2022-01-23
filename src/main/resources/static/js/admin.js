@@ -5,17 +5,10 @@ charts.forEach(function (chart){
     var myChart= new Chart(ctx, {
         type: "bar",
         data: {
-<<<<<<< HEAD
             labels: ["Instructors", "Clients", "Enrollements", "Projects"],
             datasets: [
                 {
                     label: "Clients - Tutorials - Instructors - Projects",
-=======
-            labels: ["C++", "Python", "Ruby", "Javascript", "Java", "HTML/CSS"],
-            datasets: [
-                {
-                    label: "Clients - Tutorials chart",
->>>>>>> origin/main
                     data: [120, 45, 10, 50 ,90 ,145],
                     backgroundColor: [
                         "rgba(255, 99, 132, 1)",

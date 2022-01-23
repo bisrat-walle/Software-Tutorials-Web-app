@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .home-nav {
     display: flex;
     justify-content: space-between;
@@ -12,9 +11,6 @@
 }
 
  .navbar-expand-sm .navbar-collapse{
-=======
-.navbar-expand-sm .navbar-collapse{
->>>>>>> origin/main
     display: flex!important;
     flex-basis: auto;
     position: absolute;
@@ -26,7 +22,6 @@
       color:blue;
   }
 
-<<<<<<< HEAD
 .tutorial-botton-container {
     display: flex;
     justify-content: space-around;
@@ -46,5 +41,6 @@
 }
 }
 
-=======
->>>>>>> origin/main
+nav.navbar.navbar-expand-sm.navbar-light.bg-light {
+    box-shadow: 0.25em 0.25em 0.75em rgb(0 0 0 / 25%), 0.25em 0.12em 0.25em rgb(0 0 0 / 25%);
+}

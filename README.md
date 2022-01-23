@@ -2,16 +2,29 @@
 <pre>
 Our project is a web application that allows users to 
       1. search for tutorials
+	  2. create tutorials and projects
       2. enroll for their favorite tutorial
       3. submit the project attached to a specific tutorial track
 </pre>
-## The two main business features in addition to authentication and authorization
+
+
+## User Types
 
 <pre>
-    1. Tutorial Enrollement - CRUD operations (Enroll(POST), UnEnroll(DELETE), ViewTutorial(GET))
-    2. Project Submission - CRUD operations (CreateProject(POST), DeleteProject(DELETE), 
-                                              SubmitProject(POST), EditProject(PUT), 
-                                                      ViewProject(GET))
+In this project we have three types of users
+	1. Clients
+	2. Instructors
+	3. Admin
+</pre>
+
+
+## Business features in addition to authentication and authorization
+
+<pre>
+    1. Tutorial Enrollement for Clients - CRUD operations (Enroll(POST), UnEnroll(DELETE), ViewTutorial(GET))
+	2. Tutorial Creation for Instructors - CRUD operations (Create(POST), delete(DELETE), ViewTutorial(GET))
+    3. Project Submission - CRUD operations (SubmitProject(POST),  ViewProject(GET))
+	4. Project Creation for Instructors -  CRUD operations (CreateProject(POST), ViewProject(GET), UpdateProject (PUT), DeleteProject(DELETE))
 </pre>
       
 ## Group Members
@@ -26,3 +39,12 @@ Our project is a web application that allows users to
 
 </pre>
  
+## Technologies Used
+
+<pre>
+	1. Spring Boot - Java
+	2. Thymleaf - Templating engine
+	3. Bootstrap 5
+	4. HTML, CSS, and Javascript
+</pre>
+

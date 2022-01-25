@@ -17,14 +17,14 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long projectId;
 
-    @NotNull
+    @NotNull(message = "Project title cannot be null")
     @Column(length = 30, nullable = false)
-    @Size(max = 30, message  = "title must be at least 5 characters long ")
+    @Size(min = 5, message  = "Title must be at least 5 characters long ")
     private String title;
 
-    @NotNull
+    @NotNull(message = "Project content cannot be null")
     @Column(length = 1000, nullable = false)
-    @Size(min = 5, message  = "problem statement must be at least 500 characters long ")
+    @Size(min = 100, message  = "Problem statement must be at least 100 characters long ")
     private String problemStatement;
 
 	

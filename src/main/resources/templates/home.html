@@ -20,6 +20,10 @@
 		<a class="navbar-brand" href="#"><img class="img-fluid " style="width:6rem" th:src="@{/images/logo.png}"></a>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			
+				<li class="nav-item" th:if="${user.getRole()} == 'ADMIN'">
+                    <a th:href="@{/admin}" class="nav-link fw-bold ">Manage System</a>
+				</li>
 
 				<li class="nav-item" th:if="${loggedIn}">
 					<a th:href="@{/tutorials/all}" class="nav-link fw-bold ">Explore Tutorials ... </a>

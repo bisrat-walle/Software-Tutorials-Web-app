@@ -21,14 +21,14 @@ public class Tutorial implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long tutorialId;
 
-    @NotNull
+    @NotNull(message="Tutorial title cannot be empty")
     @Column(length = 50, nullable = false)
-    @Size(min = 5, message  = "title must be at least 5 characters long ")
+    @Size(min = 5, message  = "Title must be at least 5 characters long ")
     private String title;
 
-    @NotNull
+    @NotNull(message="Tutorial content cannot be empty")
     @Column(length = 10000, nullable = false)
-    @Size(min = 5, message  = "tutorial content must be at least 500 characters long ")
+    @Size(min = 500, message  = "Tutorial content must be at least 500 characters long ")
     private String content;
 
     @EqualsAndHashCode.Exclude

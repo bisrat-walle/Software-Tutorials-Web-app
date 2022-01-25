@@ -23,7 +23,7 @@ public class SoftwaretuApplication {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner dataLoader(UserRepository repo) {
 		return args -> {
 			User user = new User();
@@ -34,6 +34,6 @@ public class SoftwaretuApplication {
 			user.setEmail("admin@gmail.com");
 			repo.save(user);
 		};
-	}
+	}*/
 
 }

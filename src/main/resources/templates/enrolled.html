@@ -57,8 +57,30 @@
     </div>
 </nav>
 
-  <div class="text-center">
-	<h4 th:if="${enrolledTutorials.size()} == 0">No tutorials enrolled yet!</h4>
+
+  
+    <div th:if="${enrolledTutorials.size()} == 0">
+	
+		<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Hey <span th:text="${user.getFullName()}",</h1>
+                <h2>
+                    No tutorials enrolled yet!</h2>
+                <div class="error-details">
+                    You haven't enrolled for tutorials!
+                </div>
+                <div class="error-actions">
+                    <a th:href="@{/tutorials/all}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Enroll for tutorials </a><a href="mailto:bisratwalle3@gmail.com" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Contact Support Team </a>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+
   </div>
 
 <div class="container tutorial-container">
@@ -67,7 +89,6 @@
         <img th:src="@{../images/tutorial_image.PNG}" th:class="card-img-top" alt="tutorial image">
         <div th:class="card-body">
             <h5 class="card-title" th:text="${tutorial.getTitle()}">Tutorial Title</h5>
-            <p class="card-text" th:text="${tutorial.getContent()}">Tutorial Content</p>
 
             <div class="tutorial-botton-container">
                 <a th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>

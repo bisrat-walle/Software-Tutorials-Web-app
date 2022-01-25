@@ -40,12 +40,20 @@
                   <li class="nav-item" th:if="${loggedIn}">
                     <a th:href="@{/tutorials/all}" class="nav-link fw-bold ">All Tutorials</a>
                 </li>
+				
+				
+				
+				
+				
+				
               </ul>
             </li>
           
         </ul>
 
-          
+          <li class="nav-item" th:if="${user.getRole()} == 'ADMIN'">
+                    <a th:href="@{/admin}" class="nav-link fw-bold ">Manage System</a>
+          </li>
           
 
           <li class="nav-item" th:if="${loggedIn}">
@@ -67,18 +75,40 @@
       </div>
     </div>
   </nav>
+  
+    <div th:if="${tutorials.size()} == 0">
+	
+		<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Hey <span th:text="${user.getFullName()}"></span>,</h1>
+                <h2>
+                    No tutorials yet!</h2>
+                <div th:if="${!isInstructor}" class="error-details">
+                    Tutorials are coming up, stay tuned!
+                </div>
+                <div th:if="${isInstructor}" class="error-actions">
+                    <a th:href="@{/tutorials/create}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Create tutorial for your clients </a><a href="mailto:bisratwalle3@gmail.com" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Contact Support Team </a>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+
+  </div>
+  
   <div class="container tutorial-container">
   
-  <div class="text-center">
-	<h4 th:if="${tutorials.size()} == 0">No tutorials yet!</h4>
-  </div>
+
 	
 
     <div class="card" th:each="tutorial : ${tutorials}" style="margin-bottom:30px;margin-left:5px;margin-right:5px">
       <img th:src="@{../images/tutorial_image.PNG}" th:class="card-img-top" alt="tutorial image">
       <div th:class="card-body">
         <h5 class="card-title" th:text="${tutorial.getTitle()}">Tutorial Title</h5>
-        <p class="card-text" th:text="${tutorial.getContent()}">Tutorial Content</p>
 
         <div class="tutorial-botton-container">
           <a th:if="${isInstructor} or ${enrollementChecker.check(tutorial)}" th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>
@@ -96,7 +126,7 @@
 
           </div>
 
-          <form th:if="${isInstructor} and ${enrollementChecker.checkTutorialInstructor(tutorial)}">
+          <form th:if="${isInstructor} and ${enrollementChecker.checkTutorialInstructor(tutorial)}" th:action="@{/tutorials/edit}">
             <input type="hidden" name="tutorialId" th:value="${tutorial.tutorialId}">
             <button type="submit" class="btn btn-primary">Edit</button>
           </form>

@@ -39,6 +39,7 @@ public class HomeController {
         Boolean loggedIn = true;
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("user", user);
         } catch (ClassCastException e){
             loggedIn = false;
         }
@@ -122,6 +123,7 @@ public class HomeController {
         Boolean loggedIn = true;
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
         } catch (ClassCastException e){
             loggedIn = false;
         }

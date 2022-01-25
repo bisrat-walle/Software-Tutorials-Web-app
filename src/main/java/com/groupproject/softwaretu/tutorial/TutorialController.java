@@ -48,6 +48,7 @@ public class TutorialController {
         Boolean isInstructor = true;
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("user", user);
             if (!user.getRole().equals("INSTRUCTOR")){
                 isInstructor = false;
             }
@@ -71,6 +72,7 @@ public class TutorialController {
         Boolean loggedIn = true;
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("user", user);
         } catch (ClassCastException e){
             loggedIn = false;
         }
@@ -111,6 +113,7 @@ public class TutorialController {
         Boolean loggedIn = true;
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("user", user);
         } catch (ClassCastException e){
             loggedIn = false;
         }
@@ -163,7 +166,7 @@ public class TutorialController {
 
         if (errors.hasErrors()) {
             log.info("Error creating tutorial");
-            return "redirect:/tutorials/create?error";
+            return "createTutorial";
         }
 
         Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

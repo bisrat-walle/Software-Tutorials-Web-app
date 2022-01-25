@@ -71,3 +71,10 @@ body,button{
 div#offcanvasExample {
     background-color: #065656 !important;
 }
+
+
+element.style {
+    display: flex;
+    justify-content: space-around;
+}
+

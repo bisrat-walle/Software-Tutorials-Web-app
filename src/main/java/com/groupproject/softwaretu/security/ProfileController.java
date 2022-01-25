@@ -45,25 +45,31 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/edit")
-    public String saveProfile(RegistrationForm form, Model model){
+    public String saveProfile(RegistrationForm form, Model model,
+                              @RequestParam(name = "newPassword") String newPassword){
         // ifform.getPassword() == ""
         // log.info(""+());
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (user.getPassword() == passwordEncoder.encode(form.getPassword())){
-            log.info("user "+user);
-            // userRepository.save(user);
+        if (passwordEncoder.matches(form.getPassword(), user.getPassword())){
+            user.setUsername(form.getUsername());
+            user.setFullName(form.getFullName());
+            user.setEmail(form.getEmail());
+
+            if (!newPassword.equals("")){
+                user.setPassword(passwordEncoder.encode(newPassword));
+            }
+            userRepository.save(user);
+            return "redirect:/profile";
+
         } else {
-            log.info("user "+user); 
-            model.addAttribute("user", user);
-            model.addAttribute("error", "incorrect password");
-            return "redirect:/editProfile?error";
+            return "redirect:/profile/edit?error";
         }
 
-        
 
 
-        return "redirect:/profile";
+
+
     }
 
     @PostMapping("/user/delete")

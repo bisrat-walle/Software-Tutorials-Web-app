@@ -4,6 +4,7 @@ import com.groupproject.softwaretu.enrollement.Enrollement;
 import com.groupproject.softwaretu.enrollement.EnrollementRepository;
 import com.groupproject.softwaretu.project.Project;
 import com.groupproject.softwaretu.project.ProjectRepository;
+import com.groupproject.softwaretu.security.UserRepository;
 import com.groupproject.softwaretu.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -36,6 +37,9 @@ public class TutorialController {
 
     @Autowired
     private EnrollementRepository enrollementRepository;
+	
+	@Autowired
+    private UserRepository userRepository ;
 
     @GetMapping("/all")
     public String allTutorials(Model model){
@@ -119,6 +123,8 @@ public class TutorialController {
 
         return "myTutorials";
     }
+	
+	
 
     @GetMapping("/create")
     public String createTutorial(Model model){
@@ -132,12 +138,12 @@ public class TutorialController {
         model.addAttribute("loggedIn", loggedIn);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("newTutorial", new Tutorial());
+        model.addAttribute("tutorial", new Tutorial());
         return "createTutorial";
     }
 
     @PostMapping("/create")
-    public String processTutorial(@Valid Tutorial newTutorial, Errors errors,
+    public String processTutorial(@Valid Tutorial tutorial, Errors errors,
                                   @RequestParam(required = false, name = "project_title")
                                           String projectTitle,
                                   @RequestParam(required = false, name = "project_statement")
@@ -156,17 +162,16 @@ public class TutorialController {
 
 
         if (errors.hasErrors()) {
-            model.addAttribute("newTutorial", newTutorial);
             log.info("Error creating tutorial");
             return "redirect:/tutorials/create?error";
         }
 
         Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if ( ob != null){
-            newTutorial.setInstructor((User) ob);
+            tutorial.setInstructor((User) ob);
         }
 
-        newTutorial.setModifiedAt(LocalDateTime.now());
+        tutorial.setModifiedAt(LocalDateTime.now());
 
         if (projectTitle != null
                 && projectTitle.length() >= 5
@@ -177,11 +182,11 @@ public class TutorialController {
             project.setTitle(projectTitle);
             project.setProblemStatement(projectStatement);
             projectRepository.save(project);
-            newTutorial.setProject(project);
+            tutorial.setProject(project);
         }
         
-//        log.info("Processing "+newTutorial);
-        tutorialRepository.save(newTutorial);
+//        log.info("Processing "+tutorial);
+        tutorialRepository.save(tutorial);
         return "redirect:/tutorials/mytutorials";
     }
 
@@ -247,6 +252,29 @@ public class TutorialController {
 //        log.info("Processing "+newTutorial);
         tutorialRepository.save(newTutorial);
         return "redirect:/tutorials/mytutorials";
+    }
+	
+	@PostMapping("/delete")
+    public String deleteTutorial(@RequestParam(name = "tutorialId") Long id, Model model){
+        
+		tutorialRepository.deleteById(id);
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+        
+		model.addAttribute("loggedIn", loggedIn);
+		model.addAttribute("totalEnrollement", enrollementRepository.findAll());
+		model.addAttribute("totalClient", userRepository.getUserOfType("CLIENT"));
+		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
+		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("totalProject", projectRepository.findAll());
+		model.addAttribute("totalTutorial", tutorialRepository.findAll());
+		
+        return "redirect:/manage/tutorials";
     }
 
     @GetMapping("/detail/{tutorialId}")

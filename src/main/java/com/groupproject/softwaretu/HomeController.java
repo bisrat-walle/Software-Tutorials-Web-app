@@ -4,6 +4,7 @@ import com.groupproject.softwaretu.enrollement.EnrollementRepository;
 import com.groupproject.softwaretu.project.ProjectRepository;
 import com.groupproject.softwaretu.security.User;
 import com.groupproject.softwaretu.security.UserRepository;
+import com.groupproject.softwaretu.tutorial.TutorialRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +29,9 @@ public class HomeController {
 
     @Autowired
     ProjectRepository projectRepository;
+	
+	@Autowired
+    TutorialRepository tutorialRepository;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -60,7 +64,78 @@ public class HomeController {
 		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
 		model.addAttribute("users", userRepository.findAll());
 		model.addAttribute("totalProject", projectRepository.findAll());
+		model.addAttribute("totalTutorial", tutorialRepository.findAll());
         
         return "admin";
+    }
+	
+	@GetMapping("/manage/clients")
+    public String clients(Model model) {
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+
+        
+        
+        model.addAttribute("loggedIn", loggedIn);
+		model.addAttribute("totalEnrollement", enrollementRepository.findAll());
+		model.addAttribute("totalClient", userRepository.getUserOfType("CLIENT"));
+		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
+		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("totalProject", projectRepository.findAll());
+		model.addAttribute("totalTutorial", tutorialRepository.findAll());
+        
+        return "admin-clients";
+    }
+	
+	@GetMapping("/manage/instructors")
+    public String instructors(Model model) {
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+
+        
+        
+        model.addAttribute("loggedIn", loggedIn);
+		model.addAttribute("totalEnrollement", enrollementRepository.findAll());
+		model.addAttribute("totalClient", userRepository.getUserOfType("CLIENT"));
+		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
+		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("totalProject", projectRepository.findAll());
+		model.addAttribute("totalTutorial", tutorialRepository.findAll());
+        
+        return "admin-instructors";
+    }
+	
+	
+	@GetMapping("/manage/tutorials")
+    public String tutorials(Model model) {
+
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+
+        
+        
+        model.addAttribute("loggedIn", loggedIn);
+		model.addAttribute("totalEnrollement", enrollementRepository.findAll());
+		model.addAttribute("totalClient", userRepository.getUserOfType("CLIENT"));
+		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
+		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("totalProject", projectRepository.findAll());
+		model.addAttribute("totalTutorial", tutorialRepository.findAll());
+        
+        return "admin-tutorials";
     }
 }

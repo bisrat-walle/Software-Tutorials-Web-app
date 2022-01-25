@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{../../css/login.css}">
     <link rel="stylesheet" type="text/css" th:href="@{../../css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{../../css/bootstrap.min.css}">
+	<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon">
 </head>
 <body>
 
@@ -17,7 +18,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item" th:if="${loggedIn}">
-                    <a th:href="@{/tutorials/all}" class="nav-link fw-bold ">Enrolled Tutorials </a>
+                    <a th:href="@{/tutorials/all}" class="nav-link fw-bold ">Back to Tutorials </a>
                 </li>
 
                 <li class="nav-item" th:if="${loggedIn}">

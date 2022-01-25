@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Enrolled Tutorials</title>
+    <title>My Tutorials</title>
     <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{../css/style.css}" rel="stylesheet">
+	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 </head>
 <body>
 
@@ -59,6 +60,9 @@
     </div>
 </nav>
 
+  <div class="text-center">
+	<h4 th:if="${myTutorials.size()} == 0">No tutorials created yet!</h4>
+  </div>
 <div class="container tutorial-container">
     <div class="card" th:each="tutorial : ${myTutorials}" style="margin-bottom:30px;margin-left:5px;margin-right:5px">
         <img th:src="@{../images/tutorial_image.PNG}" th:class="card-img-top" alt="tutorial image">

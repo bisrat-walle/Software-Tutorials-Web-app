@@ -5,11 +5,17 @@ charts.forEach(function (chart){
     var myChart= new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["Instructors", "Clients", "Enrollements", "Projects"],
+            labels: ["Instructors", "Clients", "Enrollements", "Projects", "Tutorials"],
             datasets: [
                 {
-                    label: "Clients - Tutorials - Instructors - Projects",
-                    data: [120, 45, 10, 50 ,90 ,145],
+                    label: "Clients - Tutorials - Instructors - Projects - Tutorials",
+                    data: [
+						parseInt(document.getElementById("instructorSize").innerHTML),
+						parseInt(document.getElementById("clientSize").innerHTML),
+						parseInt(document.getElementById("enrollementSize").innerHTML),
+						parseInt(document.getElementById("projectSize").innerHTML),
+						parseInt(document.getElementById("tutorialSize").innerHTML)
+						 ],
                     backgroundColor: [
                         "rgba(255, 99, 132, 1)",
                         "rgba(54, 162, 235, 1)",
@@ -17,6 +23,7 @@ charts.forEach(function (chart){
                         "rgba(75, 192, 192, 1)",
                         "rgba(153, 102, 255, 1)",
                         "rgba(255, 159, 64, 1)",
+						"rgba(255, 159, 64, 1)",
                     ],
 
                     borderColor: [
@@ -26,6 +33,7 @@ charts.forEach(function (chart){
                         "rgba(75, 192, 192, 1)",
                         "rgba(153, 102, 255, 1)",
                         "rgba(255, 159, 64, 1)",
+						"rgba(255, 159, 64, 1)",
 
                     ],
 

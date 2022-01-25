@@ -33,14 +33,14 @@ public class Tutorial implements Serializable {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "tutorial")
+    @OneToMany(mappedBy = "tutorial", cascade=CascadeType.ALL)
     Set<Enrollement> enrollements;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "projectId")
     private Project project;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "instructor", nullable = true, referencedColumnName="id")
     User instructor;
 

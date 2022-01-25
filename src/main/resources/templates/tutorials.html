@@ -6,6 +6,7 @@
 	<title>Tutorials - All</title>
 	<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
+	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 </head>
 <body>
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -67,6 +68,11 @@
     </div>
   </nav>
   <div class="container tutorial-container">
+  
+  <div class="text-center">
+	<h4 th:if="${tutorials.size()} == 0">No tutorials yet!</h4>
+  </div>
+	
 
     <div class="card" th:each="tutorial : ${tutorials}" style="margin-bottom:30px;margin-left:5px;margin-right:5px">
       <img th:src="@{../images/tutorial_image.PNG}" th:class="card-img-top" alt="tutorial image">

@@ -3,13 +3,58 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Create tutorial</title>
+	<title>Unauthorized</title>
 	<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
 </head>
 <body>
 
-    <h3>You are not authorized</h3>
+	<nav class="navbar navbar-expand-sm navbar-light bg-light ">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#"><img class="img-fluid " style="width:6rem" th:src="@{/images/logo.png}"></a>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+				<li class="nav-item">
+					<a th:href="@{/tutorials/all}" class="nav-link fw-bold ">Explore Tutorials ... </a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link fw-bold " aria-current="page" th:href="@{/profile}">My Profile</a>
+				</li>
+				<form method="POST" th:action="@{/logout}">
+					<li class="nav-item">
+						<button style="background:none;border:none;" type="submit" class="nav-link fw-bold ">Logout</button>
+					</li>
+				</form>
+			</ul>
+		</div>
+	</div>
+</nav>
+	<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    403 Unauthorized</h2>
+                <div class="error-details">
+                    Sorry, an error has occured, You are not authorized!
+                </div>
+                <div class="error-actions">
+                    <a th:href="@{/}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a><a href="mailto:bisratwalle3@gmail.com" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Contact Support Team </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="text-center" style="margin:50px;">
+        &copy; Copyright All rights reserved!
+    </div>
+
 
     <script th:src="@{../js/bootstrap.bundle.min.js}" ></script>
     <script th:src="@{../js/bootstrap.min.js}" ></script>

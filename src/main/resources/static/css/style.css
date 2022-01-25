@@ -52,3 +52,8 @@ ul.dropdown-menu.dropdown-menu-end.show{
         margin: 0px !important;
         transform: none !important;
 }
+
+
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }

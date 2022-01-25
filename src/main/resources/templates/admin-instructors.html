@@ -169,7 +169,7 @@ xmlns:th="http://www.thymeleaf.org">
                  <div class="col-md-12">
                      <div class="card">
                          <div class="card-header">
-                             MANAGE USERS
+                             MANAGE INSTRUCTORS
                          </div>
                          <div class="card-body">
                              <div class="table-responsive">
@@ -184,7 +184,7 @@ xmlns:th="http://www.thymeleaf.org">
                                      </thead>
                                      <tbody>
 
-                                         <tr th:each="user : ${users}">
+                                         <tr th:each="user : ${totalInstructor}">
                                              <td th:text="*{user.getFullName()}"></td>
                                              <td th:text="*{user.getEmail()}"></td>
                                              <td th:text="*{user.getRole()}"></td>

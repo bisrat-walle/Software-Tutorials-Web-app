@@ -176,21 +176,21 @@ xmlns:th="http://www.thymeleaf.org">
                                  <table id="example" class="table table-striped data-table" style="width: 100%;">
                                      <thead>
                                          <tr>
-                                             <th>Full Name</th>
-                                             <th>Username </th>
-                                             <th>Role</th>
-                                             <th>Action/th>
+                                             <th>Title</th>
+                                             <th>Instructor </th>
+                                             <th>Action</th>
                                          </tr>
                                      </thead>
                                      <tbody>
 
-                                         <tr th:each="user : ${users}">
-                                             <td th:text="*{user.getFullName()}"></td>
-                                             <td th:text="*{user.getEmail()}"></td>
-                                             <td th:text="*{user.getRole()}"></td>
+                                         <tr th:each="tutorial : ${totalTutorial}">
+                                             <td th:text="*{tutorial.getTitle()}"></td>
+                                             <td th:text="*{tutorial.getInstructor().getFullName()}"></td>
                                              <td>
-                                                 <form method="POST" th:action="@{/user/delete}">
-                                                    <input type="hidden" th:value="${user.getId()}" name="userId" id="userId">
+											 
+											     <a th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>
+                                                 <form method="POST" th:action="@{/tutorial/delete}">
+                                                    <input type="hidden" th:value="${tutorial.tutorialId}" name="tutorialId" id="tutorialId">
                                                     <button type="submit" class="btn btn-danger ">DELETE</button>
                                                  </form>
                                              </td>

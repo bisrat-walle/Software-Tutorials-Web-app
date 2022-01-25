@@ -47,5 +47,21 @@ In this project we have three types of users
 	2. Thymleaf - Templating engine
 	3. Bootstrap 5
 	4. HTML, CSS, and Javascript
+	5. MySQL database as a backend
 </pre>
 
+
+## Remark
+
+
+<pre>
+Since Admins cannot signup for the system,
+
+we have used CommandLine runner to create an admin with 
+
+	1. Username - admin
+	2. Password - admin
+	
+So you can use this user to explore about the admin
+
+</pre>

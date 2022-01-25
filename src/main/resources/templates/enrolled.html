@@ -8,6 +8,7 @@
     <title>Enrolled Tutorials</title>
     <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{../css/style.css}" rel="stylesheet">
+	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 </head>
 <body>
 
@@ -55,6 +56,10 @@
         </div>
     </div>
 </nav>
+
+  <div class="text-center">
+	<h4 th:if="${enrolledTutorials.size()} == 0">No tutorials enrolled yet!</h4>
+  </div>
 
 <div class="container tutorial-container">
 

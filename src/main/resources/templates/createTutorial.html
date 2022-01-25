@@ -6,6 +6,7 @@
 	<title>Create tutorial</title>
 	<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
+	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 </head>
 <body>
 
@@ -39,7 +40,7 @@
     </div>
 </nav>
 
-	<form th:method="POST" th:object="${newTutorial}" class="create-tutorial-body container">
+	<form th:method="POST" th:object="${tutorial}" class="create-tutorial-body container">
         <h5 class="form-label">Add Tutorial</h5>
         <div th:if="${param.error}" class="alert alert-danger">
             Validation Error, Please make sure you entered a valid input.

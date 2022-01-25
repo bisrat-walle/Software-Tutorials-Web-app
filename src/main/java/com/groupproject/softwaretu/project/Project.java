@@ -26,6 +26,4 @@ public class Project {
     @Column(length = 1000, nullable = false)
     @Size(min = 100, message  = "Problem statement must be at least 100 characters long ")
     private String problemStatement;
-
-	
 }

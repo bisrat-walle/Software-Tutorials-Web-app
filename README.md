@@ -21,7 +21,7 @@ In this project we have three types of users
 ## Business features in addition to authentication and authorization
 
 <pre>
-    1. Tutorial Enrollement for Clients - CRUD operations (Enroll(POST), UnEnroll(DELETE), ViewTutorial(GET))
+    1. Tutorial Enrollement for Clients - CRUD operations (Enroll(POST), UnEnroll(DELETE), ViewTutorial(GET)), REENROLL(PUT)
     2. Tutorial Creation for Instructors - CRUD operations (Create(POST), delete(DELETE), ViewTutorial(GET))
     3. Project Submission - CRUD operations (SubmitProject(POST),  ViewProject(GET))
     4. Project Creation for Instructors -  CRUD operations (CreateProject(POST), ViewProject(GET), 

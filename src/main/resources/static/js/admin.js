@@ -5,15 +5,14 @@ charts.forEach(function (chart){
     var myChart= new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["Instructors", "Clients", "Enrollements", "Projects", "Tutorials"],
+            labels: ["Instructors", "Clients", "Enrollements", "Tutorials"],
             datasets: [
                 {
-                    label: "Clients - Tutorials - Instructors - Projects - Tutorials",
+                    label: "Instructors - Clients - Instructors - Tutorials",
                     data: [
 						parseInt(document.getElementById("instructorSize").innerHTML),
 						parseInt(document.getElementById("clientSize").innerHTML),
 						parseInt(document.getElementById("enrollementSize").innerHTML),
-						parseInt(document.getElementById("projectSize").innerHTML),
 						parseInt(document.getElementById("tutorialSize").innerHTML)
 						 ],
                     backgroundColor: [

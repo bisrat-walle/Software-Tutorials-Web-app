@@ -189,7 +189,7 @@ xmlns:th="http://www.thymeleaf.org">
                                              <td class="tut-bottons">
 											 
 											     <a th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>
-                                                 <form method="POST" th:action="@{/tutorial/delete}">
+                                                 <form method="POST" th:action="@{/tutorials/delete}">
                                                     <input type="hidden" th:value="${tutorial.tutorialId}" name="tutorialId" id="tutorialId">
                                                     <button type="submit" class="btn btn-danger ">DELETE</button>
                                                  </form>

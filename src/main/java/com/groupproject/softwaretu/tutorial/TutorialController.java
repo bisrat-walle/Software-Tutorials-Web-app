@@ -257,27 +257,37 @@ public class TutorialController {
         return "redirect:/tutorials/mytutorials";
     }
 	
-	@PostMapping("/delete")
-    public String deleteTutorial(@RequestParam(name = "tutorialId") Long id, Model model){
-        
-		tutorialRepository.deleteById(id);
+//	@PostMapping("/delete")
+//    public String deleteTutorial(@RequestParam(name = "tutorialId") Long id, Model model){
+//
+//        log.info("ID"+id);
+//        Tutorial tutorial = tutorialRepository.findByTutorialId(id);
+//
+//		tutorialRepository.delete(tutorial);
+//
+//        boolean loggedIn = true;
+//        try {
+//            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        } catch (ClassCastException e){
+//            loggedIn = false;
+//        }
+//
+//		model.addAttribute("loggedIn", loggedIn);
+//		model.addAttribute("totalEnrollement", enrollementRepository.findAll());
+//		model.addAttribute("totalClient", userRepository.getUserOfType("CLIENT"));
+//		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
+//		model.addAttribute("users", userRepository.findAll());
+//		model.addAttribute("totalProject", projectRepository.findAll());
+//		model.addAttribute("totalTutorial", tutorialRepository.findAll());
+//
+//        return "redirect:/";
+//    }
 
-        Boolean loggedIn = true;
-        try {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        } catch (ClassCastException e){
-            loggedIn = false;
-        }
-        
-		model.addAttribute("loggedIn", loggedIn);
-		model.addAttribute("totalEnrollement", enrollementRepository.findAll());
-		model.addAttribute("totalClient", userRepository.getUserOfType("CLIENT"));
-		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
-		model.addAttribute("users", userRepository.findAll());
-		model.addAttribute("totalProject", projectRepository.findAll());
-		model.addAttribute("totalTutorial", tutorialRepository.findAll());
-		
-        return "redirect:/manage/tutorials";
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam(name="tutorialId") Long id) {
+
+        tutorialRepository.deleteByTutorialId(id);
+        return "redirect:/admin";
     }
 
     @GetMapping("/detail/{tutorialId}")
@@ -311,30 +321,9 @@ public class TutorialController {
         model.addAttribute("tutorial", tutorialRepository.findByTutorialId(tutorialId));
         return "tutorial_detail";
     }
-	
+
+
 
 }
 
 
-@Service
-class EnrollementService{
-    @Autowired
-    EnrollementRepository enrollementRepository;
-
-    @Autowired
-    TutorialRepository tutorialRepository;
-    public boolean check(Tutorial tutorial){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return enrollementRepository.getEnrollementFromClientAndTutorial(user, tutorial) != null;
-    }
-
-    public boolean checkGithubLink(Tutorial tutorial){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return enrollementRepository.getGithubLinkFromClientAndTutorial(user, tutorial) == null;
-    }
-
-    public boolean checkTutorialInstructor(Tutorial tutorial){
-        User instructor = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return tutorialRepository.getInstructor(tutorial).equals(instructor);
-    }
-}

@@ -7,7 +7,7 @@
 td.tut-bottons {
     display: flex;
     justify-content: space-between;
-    width: 100.1%;
+    width: 165px;
 }
 
 .tutorial-container{

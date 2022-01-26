@@ -332,6 +332,7 @@ public class TutorialController {
         enrollement.setGithubLink(projectUrl);
         enrollementRepository.save(enrollement);
         model.addAttribute("tutorial", tutorialRepository.findByTutorialId(tutorialId));
+        model.addAttribute("enrollementService", enrollementChecker);
         return "tutorial_detail";
     }
 

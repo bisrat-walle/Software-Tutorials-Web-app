@@ -10,6 +10,10 @@ td.tut-bottons {
     width: 165px;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 .tutorial-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

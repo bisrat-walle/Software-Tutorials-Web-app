@@ -45,7 +45,7 @@
             <h4 class="card-title" th:text="${tutorial.title}"></h4>
             <hr>
             <h6 class="card-subtitle mb-2 text-muted">Enjoy your tutorial</h6>
-            <p class="card-text" th:text="${tutorial.title}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text" th:text="${tutorial.content}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
             <hr>
             <h4>Project</h4>
@@ -73,13 +73,14 @@
                             </button>
                         </div>
                     </form>
-                    <div th:if="${!enrollementService.checkGithubLink(tutorial)}">
-                        <h5>You have already submitted the project</h5>
-                    </div>
+
+                </div>
+                <div th:if="${!enrollementService.checkGithubLink(tutorial)}">
+                    <h6>You have already submitted the project</h6>
                 </div>
             </div>
 
-            <div th:if="${tutorial.project}==null"><h5>This tutorial has no project!</h5></div>
+            <div th:if="${tutorial.project}==null"><h6>This tutorial has no project!</h6></div>
 
             
             

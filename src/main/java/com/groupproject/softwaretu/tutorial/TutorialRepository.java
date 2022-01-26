@@ -26,5 +26,8 @@ public interface TutorialRepository extends CrudRepository<Tutorial, Long> {
     @Transactional
     @Query("DELETE FROM Tutorial t WHERE t.tutorialId = ?#{[0]}")
     void deleteByTutorialId(Long tutorialId);
+
+
+
 }
 

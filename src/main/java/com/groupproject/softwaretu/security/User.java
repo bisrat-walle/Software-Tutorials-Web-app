@@ -39,7 +39,6 @@ public class User implements UserDetails {
 	
 	@NotNull(message="email cannot be empty")
     @Column(unique = true)
-    @Pattern(regexp="^[A-Za-z0-9+_.-]+@(.+)$", message="email must have a format ex@ex.com")
     //@Unique(message= "email already taken")
     @Size(min = 5, message  = "email must be at least 5 characters long ")
     private String email;
@@ -61,17 +60,17 @@ public class User implements UserDetails {
 //    @Column(name = "reset_password_token", length = 30)
 //    private String resetPasswordToken;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @Column(nullable = true)
-    Set<Enrollement> enrollements;
+    // @EqualsAndHashCode.Exclude
+    // @ToString.Exclude
+    // @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    // @Column(nullable = true)
+    // Set<Enrollement> enrollements;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @Column(nullable = true)
-    Set<Tutorial> tutorials;
+    // @EqualsAndHashCode.Exclude
+    // @ToString.Exclude
+    // @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    // @Column(nullable = true)
+    // Set<Tutorial> tutorials;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

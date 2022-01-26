@@ -22,7 +22,7 @@ public class Tutorial implements Serializable {
     private Long tutorialId;
 
     @NotNull(message="Tutorial title cannot be empty")
-    @Column(length = 50, nullable = false)
+    @Column(length = 1000, nullable = false)
     @Size(min = 5, message  = "Title must be at least 5 characters long ")
     private String title;
 

@@ -2,6 +2,7 @@ package com.groupproject.softwaretu.tutorial;
 
 import com.groupproject.softwaretu.enrollement.Enrollement;
 import com.groupproject.softwaretu.enrollement.EnrollementRepository;
+import com.groupproject.softwaretu.enrollement.EnrollementService;
 import com.groupproject.softwaretu.project.Project;
 import com.groupproject.softwaretu.project.ProjectRepository;
 import com.groupproject.softwaretu.security.UserRepository;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +34,9 @@ public class TutorialController {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private TutorialService tutorialService;
 
     @Autowired
     private EnrollementRepository enrollementRepository;
@@ -92,6 +95,7 @@ public class TutorialController {
         Tutorial tutorial = tutorialRepository.findByTutorialId(tutorialId);
         Enrollement enrollement = enrollementRepository.getEnrollementFromClientAndTutorial(
                 (User) ob, tutorial);
+        log.info("=============================================================================It is going to be deleted");
         enrollementRepository.delete(enrollement);
         model.addAttribute("enrolledTutorials", enrollementRepository.getEnrolledTutorials(
                 (User) ob
@@ -100,6 +104,7 @@ public class TutorialController {
         Boolean loggedIn = true;
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
         } catch (ClassCastException e){
             loggedIn = false;
         }
@@ -286,7 +291,7 @@ public class TutorialController {
     @PostMapping("/delete")
     public String deleteUser(@RequestParam(name="tutorialId") Long id) {
 
-        tutorialRepository.deleteByTutorialId(id);
+        tutorialService.deleteTutorialCascadeProject(id);
         return "redirect:/admin";
     }
 
@@ -311,6 +316,14 @@ public class TutorialController {
                                 @RequestParam(name = "projectUrl") String projectUrl){
         Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        Boolean loggedIn = true;
+        try {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e){
+            loggedIn = false;
+        }
+
+        model.addAttribute("loggedIn", loggedIn);
 
 
         Enrollement enrollement = enrollementRepository.getEnrollementFromClientAndTutorial(

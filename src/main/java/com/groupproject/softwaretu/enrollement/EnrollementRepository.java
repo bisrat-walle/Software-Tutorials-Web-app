@@ -18,4 +18,7 @@ public interface EnrollementRepository extends CrudRepository<Enrollement, Long>
 
     @Query("SELECT e.githubLink FROM Enrollement e WHERE e.client = ?#{[0]} and e.tutorial = ?#{[1]}")
     String getGithubLinkFromClientAndTutorial(User client, Tutorial tutorial);
+
+    @Query("SELECT e FROM Enrollement e WHERE e.tutorial = ?#{[0]}")
+    Collection<Enrollement> getEnrollementFromTutorial(Tutorial tutorial);
 }

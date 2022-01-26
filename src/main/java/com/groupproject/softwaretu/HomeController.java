@@ -15,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 @Slf4j
@@ -57,13 +60,24 @@ public class HomeController {
             loggedIn = false;
         }
 
-        
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
         model.addAttribute("loggedIn", loggedIn);
 		model.addAttribute("totalEnrollement", enrollementRepository.findAll());
 		model.addAttribute("totalClient", userRepository.getUserOfType("CLIENT"));
 		model.addAttribute("totalInstructor", userRepository.getUserOfType("INSTRUCTOR"));
-		model.addAttribute("users", userRepository.findAll());
+
+        List<User> excludingAdmin = new ArrayList<>();
+
+        userRepository.findAll().forEach(
+                i -> {
+                    if(!i.getUsername().equals(user.getUsername())){
+                        excludingAdmin.add(i);
+                    }
+                }
+        );
+
+        model.addAttribute("users", excludingAdmin);
 		model.addAttribute("totalProject", projectRepository.findAll());
 		model.addAttribute("totalTutorial", tutorialRepository.findAll());
         

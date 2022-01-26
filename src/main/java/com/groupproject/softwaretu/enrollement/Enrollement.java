@@ -31,6 +31,5 @@ public class Enrollement {
 	
     @Column(length = 35, nullable = true)
     @Size(min = 5, message  = "problem statement must be at least 5 characters long ")
-    @Pattern(regexp="^http(s)?://github.com/", message="Please enter a valid github link")
     private String githubLink;
 }

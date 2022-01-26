@@ -91,7 +91,9 @@
 										th:field="*{role}"
 									/>
 									<label class="form-check-label" th:for="${#ids.prev('role')}"> Instructor </label>
-									
+
+									  </div>
+
 									<div class="form-check">
 										<input
 										th:class="|form-check-input ${#fields.hasErrors('role')? 'is-invalid': 'is-valid'}|"
@@ -106,8 +108,8 @@
 										th:if="${#fields.hasErrors('role')}"
 										th:errors="*{role}"
 									></div>
-										
-										
+
+
 									  </div>
 								</div>
 

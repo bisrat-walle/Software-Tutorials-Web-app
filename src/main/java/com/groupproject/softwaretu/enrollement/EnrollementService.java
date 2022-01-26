@@ -1,7 +1,9 @@
-package com.groupproject.softwaretu.tutorial;
+package com.groupproject.softwaretu.enrollement;
 
 import com.groupproject.softwaretu.enrollement.EnrollementRepository;
 import com.groupproject.softwaretu.security.User;
+import com.groupproject.softwaretu.tutorial.Tutorial;
+import com.groupproject.softwaretu.tutorial.TutorialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

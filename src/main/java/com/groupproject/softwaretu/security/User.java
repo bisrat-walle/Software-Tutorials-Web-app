@@ -14,6 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import com.groupproject.softwaretu.enrollement.Enrollement;
 
@@ -29,19 +31,31 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+	@NotNull(message="username cannot be empty")
     @Column(unique = true)
-    @NotNull
+	//@Unique(message= "username already taken")
     @Size(min = 5, message  = "username must be at least 5 characters long ")
     private String username;
+	
+	@NotNull(message="email cannot be empty")
     @Column(unique = true)
-    @NotNull
+    @Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", message="email must have a format ex@ex.com")
+    //@Unique(message= "email already taken")
     @Size(min = 5, message  = "email must be at least 5 characters long ")
     private String email;
-    @NotNull
+	
+    
+    @NotNull(message="Fullname cannot be empty")
+    @Size(min = 5, message  = "Full name must be at least 5 characters long ")
     private String fullName;
+	
+	
+	@NotNull(message="password cannot be empty")
+	@Size(min = 5, message  = "password must be at least 5 characters long ")
     private String password;
 
-    @NotNull
+    @NotNull(message="username cannot be empty")
+	@NotEmpty(message = "please select your role")
     private String role;
 
 //    @Column(name = "reset_password_token", length = 30)

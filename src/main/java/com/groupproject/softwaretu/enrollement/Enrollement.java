@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import com.groupproject.softwaretu.tutorial.Tutorial;
 import com.groupproject.softwaretu.security.User;
@@ -35,6 +36,7 @@ public class Enrollement {
 	
 	
     @Column(length = 35, nullable = true)
-    @Size(min = 5, message  = "problem statement must be at least 500 characters long ")
+    @Size(min = 5, message  = "problem statement must be at least 5 characters long ")
+    @Pattern(regexp="^http(s)?://github.com/", message="Please enter a valid github link")
     private String githubLink;
 }

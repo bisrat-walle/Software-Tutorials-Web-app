@@ -19,7 +19,7 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Register</h4>
-							<form method="POST" class="my-login-validation" novalidate="" th:action="@{/register}" id="registerForm">
+							<form method="POST" class="my-login-validation" novalidate="" th:action="@{/register}" id="registerForm" th:object="${user}">
 								
 								<div th:if="${param.error}" class="alert alert-danger" th:text="${exception}">
 								Invalid username or email.
@@ -27,49 +27,88 @@
 								
 								<div class="form-group">
 									<label th:for="fullName">Full Name</label>
-									<input id="fullName" type="text" class="form-control" name="fullName" required autofocus>
-									<div class="invalid-feedback">
-										What's your username?
-									</div>
+									<input
+										th:class="|form-control ${#fields.hasErrors('fullName')? 'is-invalid': 'is-valid'}|"
+										type="text"
+										th:field="*{fullName}"
+									/>
+									<div
+										class="invalid-feedback"
+										th:if="${#fields.hasErrors('fullName')}"
+										th:errors="*{fullName}"
+									></div>
 								</div>
 								
 								<div class="form-group">
 									<label for="username">Username</label>
-									<input id="username" type="text" class="form-control" name="username" required autofocus>
-									<div class="invalid-feedback">
-										Enter your username
-									</div>
+									<input
+										th:class="|form-control ${#fields.hasErrors('username')? 'is-invalid': 'is-valid'}|"
+										type="text"
+										th:field="*{username}"
+									/>
+									<div
+										class="invalid-feedback"
+										th:if="${#fields.hasErrors('username')}"
+										th:errors="*{username}"
+									></div>
 								</div>
 
 								<div class="form-group">
 									<label for="email">Email Address</label>
-									<input id="email" type="email" class="form-control" name="email" required>
-									<div class="invalid-feedback">
-										Your email is invalid
-									</div>
+									<input
+										th:class="|form-control ${#fields.hasErrors('email')? 'is-invalid': 'is-valid'}|"
+										type="email"
+										th:field="*{email}"
+									/>
+									<div
+										class="invalid-feedback"
+										th:if="${#fields.hasErrors('email')}"
+										th:errors="*{email}"
+									></div>
 								</div>
 
 								<div class="form-group">
 									<label for="password">Password</label>
-									<input id="password" type="password" class="form-control" name="password" required data-eye>
-									<div class="invalid-feedback">
-										Password is required
-									</div>
+									<input
+										th:class="|form-control ${#fields.hasErrors('password')? 'is-invalid': 'is-valid'}|"
+										type="password"
+										th:field="*{password}"
+									/>
+									<div
+										class="invalid-feedback"
+										th:if="${#fields.hasErrors('password')}"
+										th:errors="*{password}"
+									></div>
 								</div>
 
 								<div class="form-group">
 									Register as
 									  <div class="form-check">
-										<input class="form-check-input" id="instructor" type="radio" th:value="INSTRUCTOR" name="role" required>
-										<label class="form-check-label" for="instructor"> Instructor </label>
+										<input
+										th:class="|form-check-input ${#fields.hasErrors('role')? 'is-invalid': 'is-valid'}|"
+										type="radio"
+										th:value="INSTRUCTOR"
+										th:field="*{role}"
+									/>
+									<label class="form-check-label" th:for="${#ids.prev('role')}"> Instructor </label>
+									
+									<div class="form-check">
+										<input
+										th:class="|form-check-input ${#fields.hasErrors('role')? 'is-invalid': 'is-valid'}|"
+										type="radio"
+										th:value="CLIENT"
+										th:field="*{role}"
+									/>
+									<label class="form-check-label" th:for="${#ids.prev('role')}"> Client </label>
+									
+									<div
+										class="invalid-feedback"
+										th:if="${#fields.hasErrors('role')}"
+										th:errors="*{role}"
+									></div>
+										
+										
 									  </div>
-									  <div class="form-check">
-										<input class="form-check-input" id="client" type="radio" th:value="CLIENT" name="role" required>
-										<label class="form-check-label" for="client"> Client </label>
-									  </div>
-									<div class="invalid-feedback">
-										Password is required
-									</div>
 								</div>
 
 								<div class="form-group m-0" style="margin-top:30px;">

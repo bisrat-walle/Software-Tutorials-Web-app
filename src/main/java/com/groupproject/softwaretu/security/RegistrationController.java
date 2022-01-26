@@ -13,6 +13,9 @@ import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.validation.Valid;
+import org.springframework.validation.Errors;
+
 @Controller
 @RequestMapping("/register")
 @RequiredArgsConstructor
@@ -24,29 +27,30 @@ public class RegistrationController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping
-    public String register(){
+    public String register(Model model){
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return "redirect:/";
         } catch (ClassCastException e){
+            model.addAttribute("user", new User());
             return "signup";
         }
     }
 
     @PostMapping
-    public String processRegistration(RegistrationForm form, Model model){
-		try{
-			userRepository.save(form.toUser(passwordEncoder));
-			return "redirect:/login";
-		} catch(DataIntegrityViolationException ex){
-			log.info("error "+ex.getMessage());
-			model.addAttribute("Integ exception", ex.getMessage());
-			return "redirect:/register?error";
-		} catch(Exception e){
-			log.info("Exception error "+e.getMessage());
-			model.addAttribute("exception", e.getMessage());
-			return "redirect:/register?error";
-		}
+    public String processRegistration(
+                                        @Valid User user, 
+                                        Errors error, 
+                                        Model model,
+                                        RegistrationForm form
+                                        ){
+        
+        if (error.hasErrors()){
+            return "signup";
+        }
+		userRepository.save(form.myToUser(user, passwordEncoder));
+		return "redirect:/login";
+		
         
         
     }

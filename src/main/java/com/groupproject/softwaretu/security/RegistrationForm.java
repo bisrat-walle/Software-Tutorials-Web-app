@@ -22,4 +22,9 @@ public class RegistrationForm {
         user.setRole(this.role);
         return user;
     }
+
+    User myToUser(User user, PasswordEncoder encoder) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        return user;
+    }
 }

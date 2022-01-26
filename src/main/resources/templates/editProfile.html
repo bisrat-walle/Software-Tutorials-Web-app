@@ -21,11 +21,29 @@
 							<h4 class="card-title">Update Profile</h4>
 							<form method="POST" class="my-login-validation" novalidate="" id="registerForm" th:object="${user}">
 								
-								<div th:if="${param.error}" class="alert alert-danger" th:text="${exception}">
+								<div th:if="${param.incorrectPassword}" class="alert alert-danger">
 								Incorrect password.
 								</div>
 
+								<div th:if="${param.invalidNewPassword}" class="alert alert-danger">
+									The new password you entered is invalid.
+									The password must be at least 5 characters
+								</div>
+
 								<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+								<input
+										th:class="|form-control ${#fields.hasErrors('id')? 'is-invalid': 'is-valid'}|"
+										type="hidden"
+										th:field="*{id}"
+										th:value="*{id}"
+								/>
+								<input
+										th:class="|form-control ${#fields.hasErrors('role')? 'is-invalid': 'is-valid'}|"
+										type="hidden"
+										th:field="*{role}"
+										th:value="*{role}"
+								/>
 								
 								<div class="form-group">
 									<label th:for="fullName">Full Name</label>
@@ -86,13 +104,12 @@
 									></div>
 								</div>
 									  <div class="form-group">
-										<label for="password">New password (leave empty if you don't want to change)</label>
+										<label for="newPassword">New password (leave empty if you don't want to change)</label>
 										<input id="newPassword" type="password" class="form-control" name="newPassword" required data-eye>
 										<div class="invalid-feedback">
 											Password is required
 										</div>
 									</div>
-								</div>
 
 								<div class="form-group m-0" style="margin-top:30px;">
 									<button style="width:100%;margin-top:30px;" type="submit" class="btn btn-primary btn-block">

@@ -186,7 +186,7 @@ xmlns:th="http://www.thymeleaf.org">
                                          <tr th:each="tutorial : ${totalTutorial}">
                                              <td th:text="*{tutorial.getTitle()}"></td>
                                              <td th:text="*{tutorial.getInstructor().getFullName()}"></td>
-                                             <td>
+                                             <td class="tut-bottons">
 											 
 											     <a th:href="@{/tutorials/detail/{tutorialId}(tutorialId=${tutorial.tutorialId})}" class="btn btn-primary">Explore</a>
                                                  <form method="POST" th:action="@{/tutorial/delete}">

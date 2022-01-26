@@ -4,6 +4,12 @@
     padding: 10px 20px;
 }
 
+td.tut-bottons {
+    display: flex;
+    justify-content: space-between;
+    width: 100.1%;
+}
+
 .tutorial-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

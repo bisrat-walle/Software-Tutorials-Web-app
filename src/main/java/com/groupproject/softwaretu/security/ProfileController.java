@@ -28,7 +28,7 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String getProfile(Model model){
-        Boolean loggedIn = true;
+        boolean loggedIn = true;
         try {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         } catch (ClassCastException e){
@@ -54,27 +54,39 @@ public class ProfileController {
                                         Model model,
                                         RegistrationForm form,
                               @RequestParam(name = "newPassword") String newPassword){
-        // ifform.getPassword() == ""
-        // log.info(""+());
+        User currentuser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("Form user "+user);
+        log.info("Auth user "+currentuser);
 
         if (error.hasErrors()){
             return "editProfile";
         }
 
-        User currentuser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("No error");
+
+
+
+
         if (passwordEncoder.matches(user.getPassword(), currentuser.getPassword())){
+
+            log.info("matched");
+
             currentuser.setUsername(user.getUsername());
             currentuser.setFullName(user.getFullName());
             currentuser.setEmail(user.getEmail());
 
             if (!newPassword.equals("")){
+                if (newPassword.length() < 5){
+                    return "redirect:/profile/edit?invalidNewPassword";
+                }
                 currentuser.setPassword(passwordEncoder.encode(newPassword));
             }
             userRepository.save(currentuser);
             return "redirect:/profile";
 
         } else {
-            return "redirect:/profile/edit?error";
+            log.info("not matched");
+            return "redirect:/profile/edit?incorrectPassword";
         }
 
 

@@ -23,17 +23,22 @@ public class SoftwaretuApplication {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	/*@Bean
+	@Bean
 	public CommandLineRunner dataLoader(UserRepository repo) {
 		return args -> {
-			User user = new User();
-			user.setUsername("admin");
-			user.setFullName("admin");
-			user.setRole("ADMIN");
-			user.setPassword(encoder.encode("admin"));
-			user.setEmail("admin@gmail.com");
-			repo.save(user);
+
+			User temp = repo.findByUsername("admin");
+			if (temp == null){
+				User user = new User();
+				user.setUsername("admin");
+				user.setFullName("admin");
+				user.setRole("ADMIN");
+				user.setPassword(encoder.encode("admin"));
+				user.setEmail("admin@gmail.com");
+				repo.save(user);
+			}
+
 		};
-	}*/
+	}
 
 }

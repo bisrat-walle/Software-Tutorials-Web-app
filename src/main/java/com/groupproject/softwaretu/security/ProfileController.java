@@ -12,6 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
+import org.springframework.validation.Errors;
+
 
 @Controller
 @Slf4j
@@ -45,21 +48,29 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/edit")
-    public String saveProfile(RegistrationForm form, Model model,
+    public String saveProfile(
+                                        @Valid User user, 
+                                        Errors error, 
+                                        Model model,
+                                        RegistrationForm form,
                               @RequestParam(name = "newPassword") String newPassword){
         // ifform.getPassword() == ""
         // log.info(""+());
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (passwordEncoder.matches(form.getPassword(), user.getPassword())){
-            user.setUsername(form.getUsername());
-            user.setFullName(form.getFullName());
-            user.setEmail(form.getEmail());
+        if (error.hasErrors()){
+            return "editProfile";
+        }
+
+        User currentuser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (passwordEncoder.matches(user.getPassword(), currentuser.getPassword())){
+            currentuser.setUsername(user.getUsername());
+            currentuser.setFullName(user.getFullName());
+            currentuser.setEmail(user.getEmail());
 
             if (!newPassword.equals("")){
-                user.setPassword(passwordEncoder.encode(newPassword));
+                currentuser.setPassword(passwordEncoder.encode(newPassword));
             }
-            userRepository.save(user);
+            userRepository.save(currentuser);
             return "redirect:/profile";
 
         } else {

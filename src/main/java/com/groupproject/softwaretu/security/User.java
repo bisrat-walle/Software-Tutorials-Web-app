@@ -39,7 +39,7 @@ public class User implements UserDetails {
 	
 	@NotNull(message="email cannot be empty")
     @Column(unique = true)
-    @Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", message="email must have a format ex@ex.com")
+    @Pattern(regexp="^[A-Za-z0-9+_.-]+@(.+)$", message="email must have a format ex@ex.com")
     //@Unique(message= "email already taken")
     @Size(min = 5, message  = "email must be at least 5 characters long ")
     private String email;

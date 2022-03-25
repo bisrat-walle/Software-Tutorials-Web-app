@@ -14,7 +14,7 @@
 	<name>softwaretu</name>
 	<description>Software Tutorials for users</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
